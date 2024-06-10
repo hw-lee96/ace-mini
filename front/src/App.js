@@ -7,12 +7,14 @@ const UserList = () => {
     useEffect(() => {
         const fetchNews = async () => {
             try {
-                const response = await axios.get('news?question=bitcoin')
+                const response = await axios.get('news2?question=bitcoin')
                 if (
-                    Array.isArray(response.data.top_headlines.articles) &&
-                    response.data.top_headlines.articles.length > 0
+                    Array.isArray(response.data.top_headlines?.articles) &&
+                    response.data.top_headlines?.articles.length > 0
                 ) {
                     setNews(response.data.top_headlines.articles[0])
+                } else {
+                    setNews({title: JSON.stringify(response.data.news)})
                 }
             } catch (error) {
                 console.error('Error fetching users:', error)
@@ -26,7 +28,7 @@ const UserList = () => {
         <div>
             <h2>News Data</h2>
             <div>
-                <div>name : {news?.source.name}</div>
+                <div>name : {news?.source?.name}</div>
                 <div>author : {news?.author}</div>
                 <div>title : {news?.title}</div>
                 <div>publishedAt : {news?.publishedAt}</div>
