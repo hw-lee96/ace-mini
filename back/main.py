@@ -1,7 +1,18 @@
 from fastapi import FastAPI, Request, Depends, Form, status
 from fastapi.responses import RedirectResponse
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app = FastAPI()
+
+# CORS 설정
+app.add_middleware(
+    CORSMiddleware,
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE"],  # 허용할 HTTP 메소드
+    allow_headers=["*"],  # 모든 헤더를 허용할 경우
+    allow_origins=['http://localhost:3000/', 'http://127.0.0.1:3000/']
+)
 
 @app.get('/')
 async def home(request: Request):
@@ -9,7 +20,7 @@ async def home(request: Request):
 
 # news api example
 from newsapi import NewsApiClient
-@app.get('/news/')
+@app.get('/news')
 async def get_news(question: str):
     # Init
     newsapi = NewsApiClient(api_key='c161ea8b106b43d5884f93dd0ee2910f')
@@ -22,5 +33,7 @@ async def get_news(question: str):
 
     # /v2/top-headlines/sources
     # sources = newsapi.get_sources()
+
+    print('top_headlines : ', top_headlines)
     return { 'top_headlines': top_headlines }
 
