@@ -2,16 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const UserList = () => {
-  const [news, setNews] = useState([]);
+  const [news, setNews] = useState();
 
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get('news?question=bitcoin',
-            { headers: { 'Access-Control-Allow-Origin': '*' } }
-        );
-        console.log('response.data : ',response.data)
-        setNews(response.data);
+        const response = await axios.get('news?question=bitcoin')
+        if ( Array.isArray(response.data.top_headlines.articles) && response.data.top_headlines.articles.length > 0) {
+          setNews(response.data.top_headlines.articles[0])
+        }
       } catch (error) {
         console.error('Error fetching users:', error);
       }
@@ -23,7 +22,13 @@ const UserList = () => {
   return (
     <div>
       <h2>News Data</h2>
-      <div>{JSON.stringify(news)}</div>
+      <div>
+        <div>name : {news?.source.name}</div>
+        <div>author : {news?.author}</div>
+        <div>title : {news?.title}</div>
+        <div>publishedAt : {news?.publishedAt}</div>
+      </div>
+      
     </div>
   );
 };
