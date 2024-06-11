@@ -1,40 +1,52 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React from 'react'
+import { BrowserRouter as Router, useRoutes, Link } from 'react-router-dom'
+import Todo1 from './exer/hj/todo'
+import Todo2 from './exer/hw/todo'
+import Todo3 from './exer/jh/todo'
+import Todo4 from './exer/ra/todo'
+import Todo5 from './exer/yk/todo'
 
-const UserList = () => {
-    const [news, setNews] = useState()
+const Home = () => (
+    <div>
+        <Link to="/">
+            <button>HOME</button>
+        </Link>
+        <Link to="/exer/hj">
+            <button>hj</button>
+        </Link>
+        <Link to="/exer/hw">
+            <button>hw</button>
+        </Link>
+        <Link to="/exer/jh">
+            <button>jh</button>
+        </Link>
+        <Link to="/exer/ra">
+            <button>ra</button>
+        </Link>
+        <Link to="/exer/yk">
+            <button>yk</button>
+        </Link>
+    </div>
+)
 
-    useEffect(() => {
-        const fetchNews = async () => {
-            try {
-                const response = await axios.get('news2?question=bitcoin')
-                if (
-                    Array.isArray(response.data.top_headlines?.articles) &&
-                    response.data.top_headlines?.articles.length > 0
-                ) {
-                    setNews(response.data.top_headlines.articles[0])
-                } else {
-                    setNews({title: JSON.stringify(response.data.news)})
-                }
-            } catch (error) {
-                console.error('Error fetching users:', error)
-            }
-        }
+const App = () => {
+    return useRoutes([
+        { path: '/', element: <div><h2>Main Page</h2></div> },
+        { path: '/exer/hj', element: <Todo1 /> },
+        { path: '/exer/hw', element: <Todo2 /> },
+        { path: '/exer/jh', element: <Todo3 /> },
+        { path: '/exer/ra', element: <Todo4 /> },
+        { path: '/exer/yk', element: <Todo5 /> },
+    ])
+}
 
-        fetchNews()
-    }, [])
-
+const AppWrapper = () => {
     return (
-        <div>
-            <h2>News Data</h2>
-            <div>
-                <div>name : {news?.source?.name}</div>
-                <div>author : {news?.author}</div>
-                <div>title : {news?.title}</div>
-                <div>publishedAt : {news?.publishedAt}</div>
-            </div>
-        </div>
+        <Router>
+            <Home />
+            <App />
+        </Router>
     )
 }
 
-export default UserList
+export default AppWrapper
