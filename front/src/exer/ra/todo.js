@@ -5,3 +5,6 @@ const Todo4 = () => (
 )
 
 export default Todo4
+
+// react document : https://ko.legacy.reactjs.org/docs/hello-world.html
+// to do list 만들기 : https://www.geeksforgeeks.org/create-todo-app-using-reactjs/?ref=lbp
