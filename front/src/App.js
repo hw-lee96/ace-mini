@@ -7,7 +7,7 @@ const UserList = () => {
     useEffect(() => {
         const fetchNews = async () => {
             try {
-                const response = await axios.get('news2?question=bitcoin')
+                const response = await axios.get('news?question=bitcoin')
                 if (
                     Array.isArray(response.data.top_headlines?.articles) &&
                     response.data.top_headlines?.articles.length > 0
