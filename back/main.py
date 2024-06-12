@@ -8,6 +8,21 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 import os
 
+# 데이터 DB저장 관련
+import sys
+import os
+
+# 현재 파일(main.py)의 경로를 기준으로 상대 경로를 사용하여 'save_DB' 폴더 경로를 추가합니다.
+current_dir = os.path.dirname(os.path.abspath(__file__))
+save_db_dir = os.path.join(current_dir, 'save_DB')
+sys.path.append(save_db_dir)
+
+# 이제 'save_DB' 폴더 내의 모듈을 import할 수 있습니다.
+import save_db_main
+
+
+
+
 # .env 파일의 변수를 프로그램 환경변수에 추가
 load_dotenv()
 
@@ -26,7 +41,6 @@ client = MongoClient(uri)
 
 ## 2. 사용하려는 database 특정
 db = client.ace_mini
-
 ## 3. news라는 collection(table 느낌)으로 연결
 news = db.news
 
@@ -45,6 +59,38 @@ app.add_middleware(
     allow_headers=["*"],  # 모든 헤더를 허용할 경우
     allow_origins=['http://localhost:3000/', 'http://127.0.0.1:3000/']
 )
+
+
+@app.get("/save/db")
+async def add() : 
+
+    news = db['news']
+
+    
+    articls = save_db_main.save_main()
+    i = 1
+    for article in articls:
+        new_article = {
+            'company_code':article['company_code'],
+            'date': article['date'],
+            'media': article['media'],
+            'title': article['title'],
+            'link': article['link'],
+            'content': article['content'],
+            'img': article['img'],
+            'summary': article['summary'],
+            'cls_result': article['cls_result'],
+            'reg_user':'jh'
+        }
+        
+        news.insert_one(new_article)
+        print(i)
+        i+=1
+     
+  
+
+    return 2
+
 
 @app.get('/')
 async def home(request: Request):
