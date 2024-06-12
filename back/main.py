@@ -1,9 +1,41 @@
 from fastapi import FastAPI, Request, Depends, Form, status
 from fastapi.responses import RedirectResponse
 
+# 미들 웨어 관련
 from fastapi.middleware.cors import CORSMiddleware
 
+# env 관련
+from dotenv import load_dotenv
+import os
+
+# .env 파일의 변수를 프로그램 환경변수에 추가
+load_dotenv()
+
+DB_ID = os.getenv('DB_ID')
+DB_PW = os.getenv('DB_PW')
+DB_URL = os.getenv('DB_URL')
+
 app = FastAPI()
+
+# db예제
+from pymongo.mongo_client import MongoClient
+uri = f'mongodb+srv://{DB_ID}:{DB_PW}{DB_URL}'
+
+## 1. db client 생성
+client = MongoClient(uri)
+
+## 2. 사용하려는 database 특정
+db = client.ace_mini
+
+## 3. news라는 collection(table 느낌)으로 연결
+news = db.news
+
+## 4. news에 insert
+news.insert_one({'name':'duck','age':22}) 
+
+## 5. news 데이터 조회
+news = db['news'].find_one({'name' : 'duck'})
+print('### news : ', news)
 
 # CORS 설정
 app.add_middleware(
@@ -38,12 +70,11 @@ async def news(question: str):
     return { 'top_headlines': top_headlines }
 
 
-import torch
-from transformers import PreTrainedTokenizerFast, BartForConditionalGeneration
-
-# 모델과 토크나이저를 로드합니다.
-tokenizer = PreTrainedTokenizerFast.from_pretrained("gogamza/kobart-summarization")
-model = BartForConditionalGeneration.from_pretrained("gogamza/kobart-summarization")
+# import torch
+# from transformers import PreTrainedTokenizerFast, BartForConditionalGeneration
+# # 모델과 토크나이저를 로드합니다.
+# tokenizer = PreTrainedTokenizerFast.from_pretrained("gogamza/kobart-summarization")
+# model = BartForConditionalGeneration.from_pretrained("gogamza/kobart-summarization")
 
 @app.get('/news2')
 async def news2():
