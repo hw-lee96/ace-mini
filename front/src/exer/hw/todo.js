@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import './hwTodo.css'
 
 const Todo2 = () => {
@@ -7,15 +7,21 @@ const Todo2 = () => {
     const [todo, setTodo] = useState('')
 
     // input의 내용이 변경될 때 todo의 값도 업데이트 해줌
-    const todoHandleChange = (event) => setTodo({ inputValue: event.target.value })
+    const todoHandleChange = (event) => setTodo(event.target.value)
 
     const add = () => {
         if (todo == '') {
             window.alert('내용을 입력해주세요.')
-            return 
+            return
         }
         todoList.push(todo)
-        todoHandleChange({ target: { value: '' } })
+        setTodo('')
+        // todoHandleChange({ target: { value: '' } })
+    }
+
+    const del = (idx) => {
+        const updatedTodos = todoList.filter((_, i) => i !== idx)
+        setTodoList(updatedTodos)
     }
 
     return (
@@ -28,14 +34,15 @@ const Todo2 = () => {
 
                 <div>
                     {/* defaultValue와 onChange는 세트라고 생각하는게 편함 */}
-                    <input type="text" defaultValue={todo} onChange={todoHandleChange} />
+                    <input type="text" value={todo} onChange={(e) => setTodo(e.target.value)} />
                     <button onClick={add}>추가</button>
                 </div>
 
                 <div>
                     {todoList.map((todo, i) => (
                         <div key={i}>
-                            {todo.inputValue}
+                            {todo}
+                            <button onClick={() => del(i)}>삭제</button>
                         </div>
                     ))}
                 </div>
