@@ -31,11 +31,11 @@ db = client.ace_mini
 news = db.news
 
 ## 4. news에 insert
-news.insert_one({'name':'duck','age':22}) 
+# news.insert_one({'name':'duck','age':22}) 
 
 ## 5. news 데이터 조회
-news = db['news'].find_one({'name' : 'duck'})
-print('### news : ', news)
+# news = db['news'].find_one({'name' : 'duck'})
+# print('### news : ', news)
 
 # CORS 설정
 app.add_middleware(
