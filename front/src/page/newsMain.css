@@ -2,3 +2,16 @@
     width: 100%;
     height: 720px;
 }
+
+.mainWrap .title {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.titleWrap {
+    display: flex;
+    justify-content: space-between;
+}
+.titleWrap .title {
+    
+}
