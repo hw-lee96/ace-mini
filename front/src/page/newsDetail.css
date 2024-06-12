@@ -1,0 +1,5 @@
+.bodyWrap {
+  display: flex;
+  flex-direction: row;
+  height: 1080px;
+}

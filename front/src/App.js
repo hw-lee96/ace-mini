@@ -4,7 +4,7 @@ import { BrowserRouter as Router, useRoutes, Link } from 'react-router-dom'
 import './App.css'
 
 import Header from './page/header'
-import Main from './page/newsMain'
+import NewsDetail from './page/newsDetail'
 
 // const Home = () => (
 //     <div>
@@ -31,7 +31,7 @@ import Main from './page/newsMain'
 
 const App = () => {
     return useRoutes([
-        { path: '/', element: <Main /> },
+        { path: '/', element: <NewsDetail /> },
         // { path: '/exer/hj', element: <Todo1 /> },
         // { path: '/exer/hw', element: <Todo2 /> },
         // { path: '/exer/jh', element: <Todo3 /> },
