@@ -56,11 +56,16 @@ def get_classification(articles):
             # print(f"{label}: {prob:.4f}")
             result[label] = prob.item()  # 딕셔너리에 레이블과 확률 추가
 
-        article['cls_result'] = json.dumps(result)  # 결과를 JSON 형식으로 변환하여 저장
+        article['cls_results'] = json.dumps(result)  # 결과를 JSON 형식으로 변환하여 저장
+        
+        print(print)
+
+        article['result'] = one_result[0]['label']
   
-        print('rsutl ==',article['cls_result'])
-        print('result :',one_result)  # 전체 결과 중 최종 postive or negative, netural를 제공 
-        print() 
+        # print('rsutl ==',article['cls_results'])
+
+        # print('result :',one_result)  # 전체 결과 중 최종 postive or negative, netural를 제공 
+        # print() 
 
     return articles
 

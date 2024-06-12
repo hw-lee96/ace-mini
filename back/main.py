@@ -79,7 +79,8 @@ async def add() :
             'content': article['content'],
             'img': article['img'],
             'summary': article['summary'],
-            'cls_result': article['cls_result'],
+            'cls_results': article['cls_results'],
+            'result': article['result'],
             'reg_user':'jh'
         }
         
