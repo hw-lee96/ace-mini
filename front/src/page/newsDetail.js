@@ -20,8 +20,11 @@ const NewsDetail = () => {
 
         const data = rs.data;
         console.log(rs.data);
+
+        // 선택 뉴스 출력
         setSelectedArticle(data);
 
+        // 긍부정출력
         const clsResults = JSON.parse(data.cls_results);
         const labelMap = {
           negative: "부정",
@@ -41,6 +44,7 @@ const NewsDetail = () => {
         const relatedRs = await axios.get(
           `api/news/related/${data.company_name}/${id}`
         );
+        console.log(relatedRs.data);
         setRelatedArticles(relatedRs.data);
       } catch (e) {
         console.error("에러낫슈", e);
