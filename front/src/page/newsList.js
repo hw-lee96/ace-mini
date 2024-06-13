@@ -19,12 +19,13 @@ const NewsList = () => {
         fetchNewsList()
     }, [])
 
-    
-
     return (
         <div>
             <div className='news-filter'>
-
+                <div className='active'>전체</div>
+                <div>긍정</div>
+                <div>중립</div>
+                <div>부정</div>
             </div>
 
             <div>
