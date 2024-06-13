@@ -15,12 +15,14 @@ router = APIRouter(
 # /api/news/list?type=like&value=desc
 # /
 
+news_collection = db['news']
+
 @router.get("/pinbert/{result}")
 def get_news_list(result : str):
    
 
     # news 테이블에서 result 값이 {result = positive , negative, natural}를 통해 리스트 가져오기
-    sort_news_list = db['news'].find({'result' : result})
+    sort_news_list = news_collection.find({'result' : result})
 
 
     # 분류 된 기사 레코드를 저장할 배열 생성 
@@ -41,3 +43,20 @@ def get_news_list(result : str):
 # let type = pinbert 
 # let value = possive 
 # axios.get(`api/news/list?type=${type}&value=${value}`)
+
+def news_list_serializer(news) -> dict:
+    return {
+        "id" : str(news["_id"]),
+        "title": news["title"],
+        "date" : news["date"],
+        "summary": news["summary"],
+        "img": news["img"],
+        "like": news["like"],
+        "views": news["views"],
+    }
+    
+@router.get('/{page}')
+def get_news_detail(page:int = 1):
+    newsList = list(news_collection.find())
+    newsList = [news_list_serializer(news) for news in newsList]
+    return newsList
