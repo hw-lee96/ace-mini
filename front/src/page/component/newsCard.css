@@ -1,6 +1,5 @@
 /* src/components/NewsCard.css */
 .news-card {
-  width: 420px;
   height: 300px;
   display: flex;
   flex-direction: column;

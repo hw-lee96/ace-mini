@@ -57,6 +57,7 @@ const NewsCarousel = () => {
                 autoplay={{
                     delay: 2500,
                 }}
+                style={{ width: '100%', height: '300px' }}
             >
                 {relatedArticles.map((article, index) => (
                     <SwiperSlide key={index}>
