@@ -8,18 +8,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 import os
 
-# 데이터 DB저장 관련
-import sys
-import os
-
-# 현재 파일(main.py)의 경로를 기준으로 상대 경로를 사용하여 'save_DB' 폴더 경로를 추가합니다.
-current_dir = os.path.dirname(os.path.abspath(__file__))
-save_db_dir = os.path.join(current_dir, 'save_DB')
-sys.path.append(save_db_dir)
-
-# 이제 'save_DB' 폴더 내의 모듈을 import할 수 있습니다.
-import save_db_main
-
+# 데이터 DB저장 관련 함수 임포트
+from save_DB.save_db_main import save_main
 
 
 
@@ -61,13 +51,42 @@ app.add_middleware(
 )
 
 
+@app.get("/save/company/db")
+async def add_company() :
+    company_db = db['company']
+
+    path = 'C:\\ace-mini\\back\\company_list.txt'
+    i=1
+    # company_list = []
+    with open(path, encoding="utf-8") as f:
+        lines =  f.readlines()
+    
+        for line_orig in lines :
+            one_line = line_orig .strip()
+
+            separate_line = one_line.split()
+
+            company_name = str.strip(separate_line[0])
+            company_code =str.strip(separate_line[1])
+            
+            company = {
+                'comany_name' : company_name,
+                'compan_code' : company_code
+            }
+            company_db.insert_one(company)
+            print(i)
+            i +=1
+
+
+    return 2
+
 @app.get("/save/db")
 async def add() : 
 
     news = db['news']
 
     
-    articls = save_db_main.save_main()
+    articls = save_main()
     i = 1
     for article in articls:
         new_article = {
