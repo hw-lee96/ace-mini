@@ -33,7 +33,7 @@ def get_news_list(result : str):
         news['_id'] = str(news['_id'])
         sort_cls_list.append(news)
 
-    print(    sort_cls_list)
+    # print(    sort_cls_list)
 
   
     # 결과 값 리턴
