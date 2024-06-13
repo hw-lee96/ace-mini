@@ -6,7 +6,7 @@ import NewsCard from "./component/newsCard";
 const NewsDetail = () => {
   const [selectedArticle] = useState({
     title: "'AI 장착' 애플, MS 제치고 5개월 만에 장중 시총 1위 탈환",
-    author: "에이스일보",
+    media: "에이스일보",
     publishedAt: "2024-06-12",
     summary: `(로스앤젤레스=연합뉴스) 임미나 특파원 = 애플이 자체 기기에 탑재될 인공지능(AI) 기능을 공개한 다음 날인 11일(현지시간) 주가가 급등해 사상 최고치를 경신했다.
 
@@ -18,7 +18,7 @@ const NewsDetail = () => {
 
                     마감 직전에는 207.16달러까지 올라 52주 신고가를 새로 썼다.`,
     link: "https://www.yna.co.kr/view/AKR20240613001600091?input=1195m",
-    recommendations: [
+    cls_result: [
       { label: "긍정", percentage: 0.4 },
       { label: "부정", percentage: 99.1 },
       { label: "중립", percentage: 45.0 },
@@ -28,7 +28,7 @@ const NewsDetail = () => {
   const [sortedRecommendations, setSortedRecommendations] = useState([]);
 
   useEffect(() => {
-    const sorted = [...selectedArticle.recommendations].sort(
+    const sorted = [...selectedArticle.cls_result].sort(
       (a, b) => b.percentage - a.percentage
     );
     setSortedRecommendations(sorted);
@@ -65,7 +65,7 @@ const NewsDetail = () => {
       <div className="newsDetailWrap">
         <img src={apple} alt="hello" className="news-detail__image" />
         <h2 className="news-detail__title">{selectedArticle.title}</h2>
-        <p className="news-detail__author">{selectedArticle.author}</p>
+        <p className="news-detail__author">{selectedArticle.media}</p>
 
         <p className="news-detail__content"> {selectedArticle.summary} </p>
         <p className="news-detail__date">{selectedArticle.publishedAt}</p>
