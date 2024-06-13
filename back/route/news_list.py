@@ -18,22 +18,21 @@ router = APIRouter(
 def get_news_list(result : str):
    
 
+    # news 테이블에서 result 값이 {result = positive , negative, natural}를 통해 리스트 가져오기
     sort_news_list = db['news'].find({'result' : result})
 
 
-    #   MongoDB의 ObjectId를 문자열로 변환하여 문서를 반환
-    news_list = []
+    # 분류 된 기사 레코드를 저장할 배열 생성 
+    sort_cls_list = []
+
+    # 가져온 리스트를 꺼내 서 id를 문자열로 바꾼 후 배열에 저장 
     for news in sort_news_list:
         news['_id'] = str(news['_id'])
-        news_list.append(news)
+        sort_cls_list.append(news)
 
-    print(news_list)    
-
-    
-
-
-
-    return [{'test': 'test list '}]
+  
+    # 결과 값 리턴
+    return sort_news_list
 
 
 # let type = pinbert 
