@@ -17,9 +17,6 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 save_db_dir = os.path.join(current_dir, 'save_DB')
 sys.path.append(save_db_dir)
 
-# 이제 'save_DB' 폴더 내의 모듈을 import할 수 있습니다.
-import save_db_main
-
 
 
 
@@ -61,39 +58,10 @@ app.add_middleware(
 )
 
 from route import news_detail
+from route import save_db_service
+
 app.include_router(news_detail.router)
-
-@app.get("/save/db")
-async def add() : 
-
-    news = db['news']
-
-    
-    articls = save_db_main.save_main()
-    i = 1
-    for article in articls:
-        new_article = {
-            'company_code':article['company_code'],
-            'date': article['date'],
-            'media': article['media'],
-            'title': article['title'],
-            'link': article['link'],
-            'content': article['content'],
-            'img': article['img'],
-            'summary': article['summary'],
-            'cls_results': article['cls_results'],
-            'result': article['result'],
-            'reg_user':'jh'
-        }
-        
-        news.insert_one(new_article)
-        print(i)
-        i+=1
-     
-  
-
-    return 2
-
+app.include_router(save_db_service.router)
 
 @app.get('/')
 async def home(request: Request):
@@ -101,6 +69,7 @@ async def home(request: Request):
 
 # news api example
 from newsapi import NewsApiClient
+
 @app.get('/news')
 async def news(question: str):
     # Init
