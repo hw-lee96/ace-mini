@@ -4,17 +4,9 @@ import { ThemeProvider } from './theme/themeProvider'
 import { GlobalStyle } from './theme/GlobalStyle'
 import './App.css'
 
-import axios from 'axios'
-
 import Header from './page/header'
 import NewsDetail from './page/newsDetail'
 
-const run = async () => {
-    let rs = await axios.get('api/news/detail')
-    console.log('rs : ', rs)
-}
-
-run()
 // const Home = () => (
 //     <div>
 //         <Link to="/">
