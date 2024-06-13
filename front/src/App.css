@@ -1,14 +1,20 @@
 body {
-  background: #F8F9FA;
+    background: #f8f9fa;
+}
+
+@font-face {
+    font-family: 'Pretendard-Regular';
+    font-weight: normal;
+    src: url('../public/static/font/Pretendard-Regular.otf');
+}
+* {
+
+  font-family: 'Pretendard-Regular' !important;
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 16.66vw;
-}
-
-* {
-  /* border: solid 0.1px #ddd; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 16.66vw;
 }
