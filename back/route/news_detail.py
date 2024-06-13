@@ -12,6 +12,7 @@ news_collection = main.news
 
 
 class News(BaseModel):
+    company_name: str
     title: str
     date: str
     media: str
@@ -23,6 +24,7 @@ class News(BaseModel):
 def news_serializer(news) -> dict:
     return {
         "id" : str(news["_id"]),
+        "company_name" : news["company_name"],
         "title": news["title"],
         "date" : news["date"],
         "media": news["media"],
