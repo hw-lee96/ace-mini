@@ -49,6 +49,7 @@ async def add() :
     for article in articls:
         new_article = {
             'company_code':article['company_code'],
+            'company_name':article['company_name'],
             'date': article['date'],
             'media': article['media'],
             'title': article['title'],
