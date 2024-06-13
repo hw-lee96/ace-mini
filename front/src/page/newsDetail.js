@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./newsDetail.css";
 import apple from "./img/apple.jpg";
+import NewsCard from "./component/newsCard";
 
 const NewsDetail = () => {
   const [selectedArticle] = useState({
     title: "애플 주가, AI 전략 공개 영향 7% 급등 사상 최고치…200불 돌파",
     author: "에이스일보",
-    date: "2024-06-12",
+    publishedAt: "2024-06-12",
     content: `(로스앤젤레스=연합뉴스) 임미나 특파원 = 애플이 자체 기기에 탑재될 인공지능(AI) 기능을 공개한 다음 날인 11일(현지시간) 주가가 급등해 사상 최고치를 경신했다.
 
                     이날 뉴욕증시에서 애플 주가는 전장보다 7.26% 오른 207.15달러에 마감했다.
@@ -38,6 +39,25 @@ const NewsDetail = () => {
     return `rgba(127, 39, 255, ${alpha})`; // 보라색을 기반으로 투명도 조절
   };
 
+  const relatedArticles = [
+    {
+      image:
+        "https://imgnews.pstatic.net/image/277/2024/06/13/0005431172_001_20240613090716062.jpg?type=w647",
+      title: "삼성전자 노사, 오늘 대화 재개…갈등 봉합 여부 주목",
+      publishedAt: "2024.06.13 09:05",
+      content:
+        "삼성전자 노사가 13일 오전 10시부터 서울 서초사옥 인근 모처에서 만나 본교섭 일정과 논의 방향 등에 대해 의견을 나눈다.",
+    },
+    {
+      image:
+        "https://imgnews.pstatic.net/image/421/2024/06/13/0007598064_001_20240613061310646.jpg?type=w647",
+      title: "'갓비디아 수혜주' 한미반도체, LG전자 시총 제치며 '고공행진'",
+      publishedAt: " 2024.06.13 06:12",
+      content:
+        "AI 반도체인 고대역폭메모리(HBM) 후공정에 필수적인 열압착(Thermal Compression) 본더를 생산하는 한미반도체 주가가 역대 최고가를 또 한 번 갈아치우며 LG전자 시가총액을 제쳤다.",
+    },
+  ];
+
   return (
     <div className="bodyWrap">
       <div className="blank"></div>
@@ -47,7 +67,7 @@ const NewsDetail = () => {
         <p className="news-detail__author">{selectedArticle.author}</p>
 
         <p className="news-detail__content"> {selectedArticle.content} </p>
-        <p className="news-detail__date">{selectedArticle.date}</p>
+        <p className="news-detail__date">{selectedArticle.publishedAt}</p>
 
         <button className="news-detail__button">기사 원본 보러가기</button>
         <div className="news-detail__recommendations">
@@ -71,6 +91,20 @@ const NewsDetail = () => {
               </li>
             ))}
           </ul>
+        </div>
+        <div className="related-articles">
+          <h3>같이 보면 좋을 뉴스</h3>
+          <div className="related-articles__list">
+            {relatedArticles.map((article, index) => (
+              <NewsCard
+                key={index}
+                image={article.image}
+                title={article.title}
+                content={article.content}
+                publishedAt={article.publishedAt}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
