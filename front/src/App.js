@@ -1,6 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, useRoutes, Link } from 'react-router-dom'
-
+import { ThemeProvider } from './theme/themeProvider'
+import { GlobalStyle } from './theme/GlobalStyle'
 import './App.css'
 
 import axios from 'axios'
@@ -51,10 +52,13 @@ const App = () => {
 const AppWrapper = () => {
     return (
         <Router>
-            <div className="container">
-                <Header />
-                <App />
-            </div>
+            <ThemeProvider>
+                <GlobalStyle />
+                <div className="container">
+                    <Header />
+                    <App />
+                </div>
+            </ThemeProvider>
         </Router>
     )
 }
