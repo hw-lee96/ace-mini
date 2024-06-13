@@ -51,11 +51,14 @@ app.add_middleware(
 )
 
 
+
+
+
 @app.get("/save/company/db")
 async def add_company() :
     company_db = db['company']
 
-    path = 'C:\\ace-mini\\back\\company_list.txt'
+    path = 'C:\\ace-mini\\back\\save_DB\\log\\company_list.txt'
     i=1
     # company_list = []
     with open(path, encoding="utf-8") as f:
@@ -80,7 +83,7 @@ async def add_company() :
 
     return 2
 
-@app.get("/save/db")
+@app.get("/save/")
 async def add() : 
 
     news = db['news']
