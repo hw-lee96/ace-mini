@@ -59,9 +59,11 @@ app.add_middleware(
 
 from route import news_detail
 from route import save_db_service
+from route import news_list
 
 app.include_router(news_detail.router)
 app.include_router(save_db_service.router)
+app.include_router(news_list.router)
 
 @app.get('/')
 async def home(request: Request):

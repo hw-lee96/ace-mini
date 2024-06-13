@@ -6,6 +6,7 @@ import "./App.css";
 
 import Header from "./page/header";
 import NewsDetail from "./page/newsDetail";
+import NewsMain from "./page/newsMain";
 
 // const Home = () => (
 //     <div>
@@ -33,10 +34,8 @@ import NewsDetail from "./page/newsDetail";
 const App = () => {
   return useRoutes([
     { path: "/", element: <NewsDetail /> },
+    { path: "/main", element: <NewsMain /> },
     { path: "/:id", element: <NewsDetail /> },
-
-    // { path: '/exer/hj', element: <Todo1 /> },
-    // { path: '/exer/hw', element: <Todo2 /> },
     // { path: '/exer/jh', element: <Todo3 /> },
     // { path: '/exer/ra', element: <Todo4 /> },
     // { path: '/exer/yk', element: <Todo5 /> },

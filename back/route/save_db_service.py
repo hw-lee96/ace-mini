@@ -49,6 +49,7 @@ async def add() :
     for article in articls:
         new_article = {
             'company_code':article['company_code'],
+            'company_name':article['company_name'],
             'date': article['date'],
             'media': article['media'],
             'title': article['title'],
@@ -58,7 +59,9 @@ async def add() :
             'summary': article['summary'],
             'cls_results': article['cls_results'],
             'result': article['result'],
-            'reg_user':'jh'
+            'like':article['like'],
+            'views':article['views'],
+            'reg_user':'admin'
         }
         
         news.insert_one(new_article)

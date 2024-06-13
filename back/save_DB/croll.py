@@ -1,6 +1,7 @@
 """ 주식종목 뉴스(네이버 파이넌스) Crawling 하기 """  
  
  
+import random
 from bs4 import BeautifulSoup
 import requests
 import re
@@ -14,7 +15,9 @@ os.chdir(log_dir)
  
  
 #   크롤 함수 (종목코드, 최대페이지)
-def crawler(company_code, maxpage):
+def crawler(company_name,company_code, maxpage):
+
+    print('company namne = ' , company_name ,'company code = ' , company_code) 
     
     page = 1 
     result ={}
@@ -88,14 +91,25 @@ def crawler(company_code, maxpage):
      
          # 결과를 articles 리스트에 추가
         for i in range(len(result['dates'])):
+            # 좋아요 0 ~ 100
+            # 조회수 0~ 1000
+            
+            like = random.randint(0, 100)
+            views = random.randint(0,1000)
+
             article = {
                 'company_code':company_code,
+                'company_name':company_name,
                 'date': result['dates'][i],
                 'media': result['medias'][i],
                 'title': result['titles'][i],
                 'link': result['links'][i],
+                'like' : like,
+                'views':views,
             }
+            
             articles.append(article)
+            print('views = ' , views , 'like = ' , like)
 
         # 페이지 증가
         page += 1
@@ -109,27 +123,37 @@ def crawler(company_code, maxpage):
 # 종목 리스트 파일 열기  
 # 회사명을 종목코드로 변환 
         
-def convert_to_code(company, maxpage):
+def convert_to_code(company,maxpage):
     
-    data = pd.read_csv('company_list.txt', dtype=str, sep='\t')   # 종목코드 추출 
+      # 종목코드와 회사명 데이터 불러오기
+    data = pd.read_csv('company_list.txt', dtype=str, sep='\t')
     company_name = data['회사명']
-    keys = [i for i in company_name]    #데이터프레임에서 리스트로 바꾸기 
- 
+    
+    # 리스트로 변환
+    keys = [i for i in company_name]
     company_code = data['종목코드']
     values = [j for j in company_code]
- 
-    dict_result = dict(zip(keys, values))  # 딕셔너리 형태로 회사이름과 종목코드 묶기 
     
-    pattern = '[a-zA-Z가-힣]+' 
+    # 회사명과 종목코드를 딕셔너리로 묶기
+    dict_code_to_name = dict(zip(values, keys))  # 종목코드 -> 회사명
+    dict_name_to_code = dict(zip(keys, values))  # 회사명 -> 종목코드
     
-    if bool(re.match(pattern, company)) == True:         # Input에 이름으로 넣었을 때  
-        company_code = dict_result.get(str(company))
-        return crawler(company_code, maxpage)  
- 
+    # 패턴 정의 (한글, 알파벳)
+    pattern = '[a-zA-Z가-힣]+'
     
-    else:                                                # Input에 종목코드로 넣었을 때       
-        company_code = str(company)      
-        return crawler(company_code, maxpage)  #
+    # 입력이 회사 이름일 경우
+    if bool(re.match(pattern, company)) == True:
+        company_name = company
+        company_code = dict_name_to_code.get(str(company),None)
+    # 입력이 종목 코드일 경우
+    else:
+        company_name = dict_code_to_name.get(str(company), None)
+        company_code = company
+    
+    if company_name:
+        return crawler(company_name,company_code, maxpage)
+    else:
+        raise ValueError("유효한 회사 이름 또는 종목 코드를 입력해주세요.")
         
            
 
