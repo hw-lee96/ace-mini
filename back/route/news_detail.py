@@ -20,6 +20,8 @@ class News(BaseModel):
     img : str
     summary: str
     cls_results: str
+    like: int
+    views: int
     
 def news_serializer(news) -> dict:
     return {
@@ -32,6 +34,8 @@ def news_serializer(news) -> dict:
         "link": news["link"],
         "summary": news["summary"],
         "cls_results": news["cls_results"],
+        "like": news["like"],
+        "views": news["views"],
     }
     
     

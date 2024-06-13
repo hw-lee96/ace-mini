@@ -19,18 +19,20 @@ const NewsDetail = () => {
         let rs = await axios.get(`api/news/detail/${id}`);
 
         const data = rs.data;
-        console.log(rs.data);
 
         // 선택 뉴스 출력
+        console.log(rs.data);
         setSelectedArticle(data);
 
         // 긍부정출력
         const clsResults = JSON.parse(data.cls_results);
+
         const labelMap = {
           negative: "부정",
           neutral: "중립",
           positive: "긍정",
         };
+
         const formattedClsResults = Object.keys(clsResults)
           .map((key) => ({
             label: labelMap[key], // label값을 반환
@@ -90,7 +92,7 @@ const NewsDetail = () => {
           className="news-detail__image"
         />
         <h2 className="news-detail__title">{selectedArticle.title}</h2>
-        <p className="news-detail__author">{selectedArticle.media}</p>
+        <p className="news-detail__media">{selectedArticle.media}</p>
 
         <p className="news-detail__content"> {selectedArticle.summary} </p>
         <p className="news-detail__date">{selectedArticle.date}</p>

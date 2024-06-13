@@ -13,8 +13,6 @@
   align-items: center;
   display: flex;
   flex-direction: row;
-  margin-top: 10px;
-  margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 20px;
 }
@@ -51,10 +49,13 @@
   font-size: 24px;
   margin-top: 20px;
 }
+.news-detail__media {
+  margin-top: 20px;
+}
 
 .news-detail__date {
   color: #888;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .news-detail__content {
