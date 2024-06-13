@@ -40,13 +40,25 @@ async def get_news_detail(id : str):
     
     news = news_collection.find_one({"_id": ObjectId(id)})
     if news is None:
-        raise HTTPException(status_code=404, detail="뉴스가 찾아도 안나옴")
+        raise HTTPException(status_code=404, detail="뉴스 찾아도 안나옴")
     
     return news_serializer(news)
 
-@router.get("/detail")
-async def test():
+
+
+@router.get("/related/{company_name}/{exclude_id}")
+async def get_related_news(company_name : str, exclude_id: str):
     
+    # 몽고DB 쿼리를 사용하여 같은회사의 2개 기사를 중복없이 get하기
+    related_articles = list(news_collection.find({
+        
+        "company_name": company_name,   # 같은 회사 이름을 가진 기사만 선택
+        "_id": {'$ne': ObjectId(exclude_id)}    # 현재기사와 중복 금지 '$ne'
+        
+    }).sort('date', -1).limit(2))
+    
+    for article in related_articles:
+        article['_id'] = str(article['_id'])    # MongoDB ObjectId를 문자열로 변환
  
-    return {'test':'success '}
+    return related_articles
 

@@ -19,7 +19,9 @@ const NewsDetail = () => {
         let rs = await axios.get(`api/news/detail/${id}`);
 
         const data = rs.data;
+        console.log(rs.data);
         setSelectedArticle(data);
+
         const clsResults = JSON.parse(data.cls_results);
         const labelMap = {
           negative: "부정",
@@ -35,26 +37,11 @@ const NewsDetail = () => {
 
         setSortedRecommendations(formattedClsResults);
 
-        // Related articles 설정 (예시 데이터)
-        setRelatedArticles([
-          {
-            image:
-              "https://imgnews.pstatic.net/image/277/2024/06/13/0005431172_001_20240613090716062.jpg?type=w647",
-            title: "삼성전자 노사, 오늘 대화 재개…갈등 봉합 여부 주목",
-            publishedAt: "2024.06.13 09:05",
-            summary:
-              "삼성전자 노사가 13일 오전 10시부터 서울 서초사옥 인근 모처에서 만나 본교섭 일정과 논의 방향 등에 대해 의견을 나눈다.",
-          },
-          {
-            image:
-              "https://imgnews.pstatic.net/image/421/2024/06/13/0007598064_001_20240613061310646.jpg?type=w647",
-            title:
-              "'갓비디아 수혜주' 한미반도체, LG전자 시총 제치며 '고공행진'",
-            publishedAt: " 2024.06.13 06:12",
-            summary:
-              "AI 반도체인 고대역폭메모리(HBM) 후공정에 필수적인 열압착(Thermal Compression) 본더를 생산하는 한미반도체 주가가 역대 최고가를 또 한 번 갈아치우며 LG전자 시가총액을 제쳤다.",
-          },
-        ]);
+        // 현재회사와의 관련기사 설정
+        const relatedRs = await axios.get(
+          `api/news/related/${data.company_name}/${id}`
+        );
+        setRelatedArticles(relatedRs.data);
       } catch (e) {
         console.error("에러낫슈", e);
       }
