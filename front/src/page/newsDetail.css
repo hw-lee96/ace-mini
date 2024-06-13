@@ -50,18 +50,17 @@
   cursor: pointer;
   width: 100%; /* 버튼을 양쪽으로 길게 설정 */
   box-sizing: border-box; /* 패딩과 보더를 포함하여 100% 너비를 유지 */
-}
-.news-detail__button:hover {
-  display: block;
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #704eff;
-  color: #fff;
-  border: solid #704eff 1px;
-  border-radius: 4px;
-  cursor: pointer;
+  text-align: center; /* 텍스트 가운데 정렬 */
+  font-size: 16px; /* 글자 크기 설정 */
   width: 100%; /* 버튼을 양쪽으로 길게 설정 */
   box-sizing: border-box; /* 패딩과 보더를 포함하여 100% 너비를 유지 */
+  transition: background-color 0.3s, color 0.3s; /* 호버 효과를 위한 트랜지션 */
+  font-size: small;
+  text-decoration: none;
+}
+.news-detail__button:hover {
+  background-color: #704eff;
+  color: #fff;
 }
 
 .news-detail__recommendations {
