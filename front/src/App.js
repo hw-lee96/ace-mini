@@ -5,6 +5,7 @@ import { GlobalStyle } from "./theme/GlobalStyle";
 import "./App.css";
 
 import Header from "./page/header";
+import NewsList from "./page/newsList";
 import NewsDetail from "./page/newsDetail";
 import NewsMain from "./page/newsMain";
 
@@ -33,9 +34,10 @@ import NewsMain from "./page/newsMain";
 
 const App = () => {
   return useRoutes([
-    { path: "/", element: <NewsDetail /> },
+    { path: "/", element: <NewsList /> },
     { path: "/main", element: <NewsMain /> },
     { path: "/:id", element: <NewsDetail /> },
+    // { path: '/exer/hw', element: <Todo2 /> },
     // { path: '/exer/jh', element: <Todo3 /> },
     // { path: '/exer/ra', element: <Todo4 /> },
     // { path: '/exer/yk', element: <Todo5 /> },

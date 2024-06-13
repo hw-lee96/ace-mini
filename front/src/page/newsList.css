@@ -51,6 +51,9 @@
     line-height: 22px;
     color: rgba(119, 121, 124, 1);
 }
+.content-font > u {
+    font-weight: 600;
+}
 .date-font {
     font-size: 14px;
     font-weight: 400;
