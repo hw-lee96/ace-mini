@@ -94,8 +94,8 @@ def crawler(company_name,company_code, maxpage):
             # 좋아요 0 ~ 100
             # 조회수 0~ 1000
             
-            like = random.randint(0, 100)
-            views = random.randint(0,1000)
+            like = random.randint(0, 80)
+            views = random.randint(101,700)
 
             article = {
                 'company_code':company_code,
