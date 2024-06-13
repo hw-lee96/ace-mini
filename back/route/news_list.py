@@ -13,6 +13,7 @@ router = APIRouter(
 
 # /api/news/list?type=pinbert&value=possive
 # /api/news/list?type=like&value=desc
+# /
 
 @router.get("/pinbert/{result}")
 def get_news_list(result : str):
@@ -30,9 +31,11 @@ def get_news_list(result : str):
         news['_id'] = str(news['_id'])
         sort_cls_list.append(news)
 
+    print(    sort_cls_list)
+
   
     # 결과 값 리턴
-    return sort_news_list
+    return sort_cls_list
 
 
 # let type = pinbert 
