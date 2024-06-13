@@ -1,10 +1,11 @@
 import React from 'react'
 import { BrowserRouter as Router, useRoutes, Link } from 'react-router-dom'
-
+import { ThemeProvider } from './theme/themeProvider'
+import { GlobalStyle } from './theme/GlobalStyle'
 import './App.css'
 
 import Header from './page/header'
-import NewsDetail from './page/newsDetail'
+import NewsMain from './page/newsMain'
 
 // const Home = () => (
 //     <div>
@@ -31,7 +32,7 @@ import NewsDetail from './page/newsDetail'
 
 const App = () => {
     return useRoutes([
-        { path: '/', element: <NewsDetail /> },
+        // { path: '/', element: <NewsMain /> },
         // { path: '/exer/hj', element: <Todo1 /> },
         // { path: '/exer/hw', element: <Todo2 /> },
         // { path: '/exer/jh', element: <Todo3 /> },
@@ -43,10 +44,13 @@ const App = () => {
 const AppWrapper = () => {
     return (
         <Router>
-            <div className='container'>
-                <Header />
-                <App />
-            </div>
+            <ThemeProvider>
+                <GlobalStyle />
+                <div className="container">
+                    <Header />
+                    <App />
+                </div>
+            </ThemeProvider>
         </Router>
     )
 }
