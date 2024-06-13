@@ -1,5 +1,5 @@
-1. conda create -n ace_mini python=3.12
-2. conda activate ace_mini
-3. pip install fastapi uvicorn newsapi-python torch transformers python-dotenv "pymongo[srv]"
-4. cd back
-5. uvicorn main:app --reload --port=8001
+conda create -n ace_mini python=3.12
+conda activate ace_mini
+pip install fastapi uvicorn newsapi-python torch transformers python-dotenv "pymongo[srv]" beautifulsoup4 pandas scipy lxml
+cd back
+uvicorn main:app --reload --port=8001
