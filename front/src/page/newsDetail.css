@@ -11,7 +11,7 @@
 }
 
 .newsDetailWrap {
-  width: 50%; /* 반만 차지하도록 설정 */
+  width: 45%; /* 반만 차지하도록 설정 */
   padding: 20px;
   background-color: #ffffff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -44,8 +44,8 @@
   margin-top: 20px;
   padding: 10px 20px;
   background-color: #fff;
-  color: #7f27ff;
-  border: solid #7f27ff 1px;
+  color: #704eff;
+  border: solid #704eff 1px;
   border-radius: 4px;
   cursor: pointer;
   width: 100%; /* 버튼을 양쪽으로 길게 설정 */
@@ -55,9 +55,9 @@
   display: block;
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: #7f27ff;
+  background-color: #704eff;
   color: #fff;
-  border: solid #7f27ff 1px;
+  border: solid #704eff 1px;
   border-radius: 4px;
   cursor: pointer;
   width: 100%; /* 버튼을 양쪽으로 길게 설정 */
@@ -101,7 +101,7 @@
 .recommendation-percentage {
   flex: 1;
   text-align: right;
-  color: #7f27ff;
+  color: #704eff;
   font-weight: bold;
 }
 

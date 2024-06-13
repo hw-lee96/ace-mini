@@ -36,7 +36,7 @@ const NewsDetail = () => {
   // 퍼센트에 따라 색상을 계산하는 함수
   const getBarColor = (percentage) => {
     const alpha = percentage / 100; // 0에서 1 사이의 값으로 변환
-    return `rgba(127, 39, 255, ${alpha})`; // 보라색을 기반으로 투명도 조절
+    return `rgba(112, 78, 255, ${alpha})`; // 보라색을 기반으로 투명도 조절
   };
 
   const relatedArticles = [
@@ -69,7 +69,7 @@ const NewsDetail = () => {
         <p className="news-detail__content"> {selectedArticle.content} </p>
         <p className="news-detail__date">{selectedArticle.publishedAt}</p>
 
-        <button className="news-detail__button">기사 원본 보러가기</button>
+        <button className="news-detail__button">기사 본문 보러가기</button>
         <div className="news-detail__recommendations">
           <h3>이 뉴스를 추천할게요</h3>
           <ul>
