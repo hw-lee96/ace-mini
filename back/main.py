@@ -1,58 +1,43 @@
-from fastapi import FastAPI, Request, Depends, Form, status
-from fastapi.responses import RedirectResponse
+# main.py
 
-# 미들 웨어 관련
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
-# env 관련
 from dotenv import load_dotenv
 import os
+from pymongo import MongoClient
+from route.router import router  # route 폴더의 router.py에서 router 객체를 임포트합니다.
+
 
 # 데이터 DB저장 관련 함수 임포트
 from save_DB.save_db_main import save_main
 
 
-
-# .env 파일의 변수를 프로그램 환경변수에 추가
+# 환경 변수 로드
 load_dotenv()
-
 DB_ID = os.getenv('DB_ID')
 DB_PW = os.getenv('DB_PW')
 DB_URL = os.getenv('DB_URL')
 
-app = FastAPI()
-
-# db예제
-from pymongo.mongo_client import MongoClient
+# MongoDB 연결 설정
 uri = f'mongodb+srv://{DB_ID}:{DB_PW}{DB_URL}'
-
-## 1. db client 생성
 client = MongoClient(uri)
-
-## 2. 사용하려는 database 특정
 db = client.ace_mini
-## 3. news라는 collection(table 느낌)으로 연결
 news = db.news
 
-## 4. news에 insert
-# news.insert_one({'name':'duck','age':22}) 
-
-## 5. news 데이터 조회
-# news = db['news'].find_one({'name' : 'duck'})
-# print('### news : ', news)
+# FastAPI 애플리케이션 설정
+app = FastAPI()
 
 # CORS 설정
 app.add_middleware(
     CORSMiddleware,
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE"],  # 허용할 HTTP 메소드
-    allow_headers=["*"],  # 모든 헤더를 허용할 경우
-    allow_origins=['http://localhost:3000/', 'http://127.0.0.1:3000/']
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
+    allow_headers=["*"],
+    allow_origins=['http://localhost:3000', 'http://127.0.0.1:3000']
 )
 
-from route import news_detail
-app.include_router(news_detail.router)
-
+# 라우터 등록
+app.include_router(router)
 
 
 
@@ -118,8 +103,9 @@ async def add() :
 
 
 @app.get('/')
-async def home(request: Request):
+async def home():
     return { 'message': 'success' }
+
 
 # news api example
 from newsapi import NewsApiClient
