@@ -4,9 +4,11 @@ import './newsList.css'
 
 const NewsList = () => {
     const [newsList, setNewsList] = useState([])
+    const [type, setType] = useState('')
 
     const getAllNewsList = async () => {
         try {
+            setType('')
             let page = 1
             const response = await axios.get(`api/news/list/${page}`)
             setNewsList(response.data || [])
@@ -15,8 +17,15 @@ const NewsList = () => {
         }
     }
 
-    
-
+    const filter = async (type) => {
+        try {
+            setType(type)
+            const response = await axios.get(`api/news/list/pinbert/${type}`)
+            setNewsList(response.data || [])
+        } catch (error) {
+            console.error('Error fetching news list:', error)
+        }
+    }
 
     useEffect(() => {
         getAllNewsList()
@@ -25,14 +34,10 @@ const NewsList = () => {
     return (
         <div>
             <div className='news-filter'>
-                <div onClick={ getAllNewsList } className='active'>전체</div>
-                {/* <div onClick={() => filter('positive')}>긍정</div> */}
-                {/* <div onClick={() => filter('neutral')}>중립</div> */}
-                {/* <div onClick={() => filter('negative')}>부정</div> */}
-                {/* <div>전체</div> */}
-                <div>긍정</div>
-                <div>중립</div>
-                <div>부정</div>
+                <div className={type == '' ? 'active' : ''} onClick={ getAllNewsList }>전체</div>
+                <div className={type == 'positive' ? 'active' : ''} onClick={() => filter('positive')}>긍정</div>
+                <div className={type == 'neutral' ? 'active' : ''} onClick={() => filter('neutral')}>중립</div>
+                <div className={type == 'negative' ? 'active' : ''} onClick={() => filter('negative')}>부정</div>
             </div>
 
             <div>
@@ -46,7 +51,7 @@ const NewsList = () => {
                                 <div>
                                     <div className="title">{news.title}</div>
                                     <div className="content content-line-clamp">
-                                        <span className="gray-color content-font">[한 줄 요약] 📝{news.summary}</span>
+                                        <span className="gray-color content-font">📝[한 줄 요약]{news.summary}</span>
                                     </div>
                                 </div>
                                 <div className="date-font">{news.date}</div>
