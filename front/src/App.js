@@ -1,11 +1,11 @@
-import React from 'react'
-import { BrowserRouter as Router, useRoutes, Link } from 'react-router-dom'
-import { ThemeProvider } from './theme/themeProvider'
-import { GlobalStyle } from './theme/GlobalStyle'
-import './App.css'
+import React from "react";
+import { BrowserRouter as Router, useRoutes, Link } from "react-router-dom";
+import { ThemeProvider } from "./theme/themeProvider";
+import { GlobalStyle } from "./theme/GlobalStyle";
+import "./App.css";
 
-import Header from './page/header'
-import NewsDetail from './page/newsDetail'
+import Header from "./page/header";
+import NewsDetail from "./page/newsDetail";
 
 // const Home = () => (
 //     <div>
@@ -31,28 +31,30 @@ import NewsDetail from './page/newsDetail'
 // )
 
 const App = () => {
-    return useRoutes([
-        { path: '/', element: <NewsDetail /> },
-        // { path: '/exer/hj', element: <Todo1 /> },
-        // { path: '/exer/hw', element: <Todo2 /> },
-        // { path: '/exer/jh', element: <Todo3 /> },
-        // { path: '/exer/ra', element: <Todo4 /> },
-        // { path: '/exer/yk', element: <Todo5 /> },
-    ])
-}
+  return useRoutes([
+    { path: "/", element: <NewsDetail /> },
+    { path: "/:id", element: <NewsDetail /> },
+
+    // { path: '/exer/hj', element: <Todo1 /> },
+    // { path: '/exer/hw', element: <Todo2 /> },
+    // { path: '/exer/jh', element: <Todo3 /> },
+    // { path: '/exer/ra', element: <Todo4 /> },
+    // { path: '/exer/yk', element: <Todo5 /> },
+  ]);
+};
 
 const AppWrapper = () => {
-    return (
-        <Router>
-            <ThemeProvider>
-                <GlobalStyle />
-                <div className="container">
-                    <Header />
-                    <App />
-                </div>
-            </ThemeProvider>
-        </Router>
-    )
-}
+  return (
+    <Router>
+      <ThemeProvider>
+        <GlobalStyle />
+        <div className="container">
+          <Header />
+          <App />
+        </div>
+      </ThemeProvider>
+    </Router>
+  );
+};
 
-export default AppWrapper
+export default AppWrapper;
