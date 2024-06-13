@@ -11,7 +11,6 @@ const ThemeProvider = ({ children }) => {
     return (
         <ThemeContext.Provider value={{ ThemeMode, setThemeMode }}>
             <StyledProvider theme={themeObject}>
-                {/* styled-components에서 제공하는 메서드 */}
                 {children}
             </StyledProvider>
         </ThemeContext.Provider>

@@ -8,4 +8,9 @@ export const GlobalStyle = createGlobalStyle`
         background: ${({theme}) => theme.bgColor};
         color: ${({theme}) => theme.textColor};
 	}
+
+	.compBg { background: ${({theme}) => theme.compoBgColor} }
+	.bgColor { background: ${({theme}) => theme.bgColor} }
+	.ftColor { color: ${({theme}) => theme.textColor} }
+
 `

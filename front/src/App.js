@@ -5,7 +5,7 @@ import { GlobalStyle } from './theme/GlobalStyle'
 import './App.css'
 
 import Header from './page/header'
-import NewsMain from './page/newsMain'
+import NewsDetail from './page/newsDetail'
 
 // const Home = () => (
 //     <div>
@@ -32,7 +32,7 @@ import NewsMain from './page/newsMain'
 
 const App = () => {
     return useRoutes([
-        // { path: '/', element: <NewsMain /> },
+        { path: '/', element: <NewsDetail /> },
         // { path: '/exer/hj', element: <Todo1 /> },
         // { path: '/exer/hw', element: <Todo2 /> },
         // { path: '/exer/jh', element: <Todo3 /> },
