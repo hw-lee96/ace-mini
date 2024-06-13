@@ -2,8 +2,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0 320px;
 }
 
 * {
-  border: solid 0.1px #ddd;
+  /* border: solid 0.1px #ddd; */
 }
