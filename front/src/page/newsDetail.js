@@ -5,6 +5,9 @@ import NewsCard from "./component/newsCard";
 import { useTheme } from "../theme/themeProvider";
 
 const NewsDetail = () => {
+  const [ThemeMode] = useTheme();
+  const [sortedRecommendations, setSortedRecommendations] = useState([]);
+
   const [selectedArticle] = useState({
     title: "'AI 장착' 애플, MS 제치고 5개월 만에 장중 시총 1위 탈환",
     media: "에이스일보",
@@ -27,8 +30,6 @@ const NewsDetail = () => {
     ],
   });
 
-  const [sortedRecommendations, setSortedRecommendations] = useState([]);
-
   useEffect(() => {
     const sorted = [...selectedArticle.cls_result].sort(
       (a, b) => b.percentage - a.percentage
@@ -41,8 +42,6 @@ const NewsDetail = () => {
     const alpha = percentage / 100; // 0에서 1 사이의 값으로 변환
     return `rgba(112, 78, 255, ${alpha})`; // 보라색을 기반으로 투명도 조절
   };
-
-  const [ThemeMode] = useTheme();
 
   const relatedArticles = [
     {
@@ -93,16 +92,22 @@ const NewsDetail = () => {
         <p className="news-detail__content"> {selectedArticle.summary} </p>
         <p className="news-detail__date">{selectedArticle.date}</p>
 
-        <a className="news-detail__button" href={selectedArticle.link}>
-          기사 본문 보러가기
-        </a>
+        {ThemeMode == "dark" ? (
+          <a className="dark-mode__button" href={selectedArticle.link}>
+            기사 본문 보러가기
+          </a>
+        ) : (
+          <a className="news-detail__button" href={selectedArticle.link}>
+            기사 본문 보러가기
+          </a>
+        )}
         <div className="news-detail__recommendations">
           <h3>이 뉴스를 추천할게요</h3>
           <ul>
             {sortedRecommendations.map((rec, index) => (
               <li key={index} className="recommendation-item">
                 <span className="recommendation-label">{rec.label}</span>
-                <div className="recommendation-bar">
+                <div className="recommendation-bar recBar">
                   <div
                     className="recommendation-bar-inner"
                     style={{
