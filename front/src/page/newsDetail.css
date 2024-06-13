@@ -10,6 +10,30 @@
   flex: 1.2;
 }
 
+.go-to-back {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+
+.small-img {
+  margin-left: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+}
+
+.small-title {
+  margin-top: 11px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
 .newsDetailWrap {
   width: 45%; /* 반만 차지하도록 설정 */
   padding: 20px;

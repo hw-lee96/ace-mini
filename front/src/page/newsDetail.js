@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import "./newsDetail.css";
 import apple from "./img/apple.jpg";
 import NewsCard from "./component/newsCard";
+import { useTheme } from "../theme/themeProvider";
 
 const NewsDetail = () => {
   const [selectedArticle] = useState({
     title: "'AI 장착' 애플, MS 제치고 5개월 만에 장중 시총 1위 탈환",
     media: "에이스일보",
+    img: "",
     date: "2024-06-12",
     summary: `(로스앤젤레스=연합뉴스) 임미나 특파원 = 애플이 자체 기기에 탑재될 인공지능(AI) 기능을 공개한 다음 날인 11일(현지시간) 주가가 급등해 사상 최고치를 경신했다.
 
@@ -40,6 +42,8 @@ const NewsDetail = () => {
     return `rgba(112, 78, 255, ${alpha})`; // 보라색을 기반으로 투명도 조절
   };
 
+  const [ThemeMode] = useTheme();
+
   const relatedArticles = [
     {
       image:
@@ -60,9 +64,28 @@ const NewsDetail = () => {
   ];
 
   return (
-    <div className="bodyWrap">
-      <div className="blank"></div>
-      <div className="newsDetailWrap">
+    <div className="bodyWrap bgClass">
+      <div className="blank compBg"></div>
+      <div className="newsDetailWrap compBg">
+        <div className="go-to-back">
+          <div>
+            {ThemeMode == "dark" ? (
+              <img
+                className="back-arrow"
+                src="./static/back_arrow_dark.png"
+                alt=""
+              />
+            ) : (
+              <img
+                className="back-arrow"
+                src="./static/back_arrow.png"
+                alt=""
+              />
+            )}
+          </div>
+          <img className="small-img" src={apple} alt="title" />
+          <span className="small-title">{selectedArticle.title}</span>
+        </div>
         <img src={apple} alt="hello" className="news-detail__image" />
         <h2 className="news-detail__title">{selectedArticle.title}</h2>
         <p className="news-detail__author">{selectedArticle.media}</p>
