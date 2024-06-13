@@ -7,6 +7,7 @@ import axios from 'axios'
 
 import Header from './page/header'
 import NewsDetail from './page/newsDetail'
+import NewsMain from './page/newsMain'
 
 const run = async () => {
     let rs = await axios.get('api/news/detail')
@@ -40,7 +41,7 @@ run()
 const App = () => {
     return useRoutes([
         { path: '/', element: <NewsDetail /> },
-        // { path: '/exer/hj', element: <Todo1 /> },
+        { path: '/main', element: <NewsMain /> },
         // { path: '/exer/hw', element: <Todo2 /> },
         // { path: '/exer/jh', element: <Todo3 /> },
         // { path: '/exer/ra', element: <Todo4 /> },

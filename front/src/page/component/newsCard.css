@@ -1,8 +1,9 @@
 /* src/components/NewsCard.css */
 .news-card {
+  width: 420px;
+  height: 300px;
   display: flex;
   flex-direction: column;
-  width: calc(50% - 20px); /* 두 개의 카드가 한 줄에 들어가도록 너비 조정 */
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -18,6 +19,8 @@
 
 .news-card__content {
   padding: 10px;
+  overflow: hidden;
+  flex: 1
 }
 
 .news-card__title {

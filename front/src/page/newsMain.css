@@ -1,17 +1,21 @@
 .mainWrap {
     width: 100%;
     height: 720px;
+    margin: 40px;
 }
 
 .mainWrap .title {
     font-size: 1.4rem;
     font-weight: 700;
+    padding: 20px;
 }
 
 .titleWrap {
     display: flex;
     justify-content: space-between;
 }
-.titleWrap .title {
-    
+
+.news-carousel {
+    margin-left: 20px;
+    margin-right: 20px;
 }
