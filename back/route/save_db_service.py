@@ -58,7 +58,9 @@ async def add() :
             'summary': article['summary'],
             'cls_results': article['cls_results'],
             'result': article['result'],
-            'reg_user':'jh'
+            'like':article['like'],
+            'views':article['views'],
+            'reg_user':'admin'
         }
         
         news.insert_one(new_article)
