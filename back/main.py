@@ -50,6 +50,8 @@ app.add_middleware(
     allow_origins=['http://localhost:3000/', 'http://127.0.0.1:3000/']
 )
 
+from route import news_detail
+app.include_router(news_detail.router)
 
 
 
