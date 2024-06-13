@@ -1,6 +1,7 @@
 """ 주식종목 뉴스(네이버 파이넌스) Crawling 하기 """  
  
  
+import random
 from bs4 import BeautifulSoup
 import requests
 import re
@@ -88,14 +89,24 @@ def crawler(company_code, maxpage):
      
          # 결과를 articles 리스트에 추가
         for i in range(len(result['dates'])):
+            # 좋아요 0 ~ 100
+            # 조회수 0~ 1000
+            
+            like = random.randint(0, 100)
+            views = random.randint(0,1000)
+
             article = {
                 'company_code':company_code,
                 'date': result['dates'][i],
                 'media': result['medias'][i],
                 'title': result['titles'][i],
                 'link': result['links'][i],
+                'like' : like,
+                'views':views,
             }
+            
             articles.append(article)
+            print('views = ' , views , 'like = ' , like)
 
         # 페이지 증가
         page += 1
