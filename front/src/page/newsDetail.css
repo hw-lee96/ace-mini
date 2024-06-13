@@ -1,11 +1,11 @@
+/* src/newsDetail.css */
 .bodyWrap {
   display: flex;
-  justify-content: flex-end;
-  flex-direction: row;
-  height: 1080px;
+  justify-content: flex-end; /* 오른쪽 정렬 */
+  height: 100vh;
   background-color: #f5f5f5;
+  overflow-x: hidden; /* 수평 스크롤 숨기기 */
 }
-/* src/newsDetail.css */
 
 .blank {
   flex: 1;
@@ -17,11 +17,12 @@
   background-color: #ffffff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+  overflow-y: auto; /* 세로 스크롤 허용 */
 }
 
 .news-detail__image {
   width: 100%;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
 .news-detail__title {
@@ -48,8 +49,20 @@
   border: solid #7f27ff 1px;
   border-radius: 4px;
   cursor: pointer;
-  width: 100%;
-  box-sizing: border-box;
+  width: 100%; /* 버튼을 양쪽으로 길게 설정 */
+  box-sizing: border-box; /* 패딩과 보더를 포함하여 100% 너비를 유지 */
+}
+.news-detail__button :active {
+  display: block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #7f27ff;
+  color: #fff;
+  border: solid #7f27ff 1px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%; /* 버튼을 양쪽으로 길게 설정 */
+  box-sizing: border-box; /* 패딩과 보더를 포함하여 100% 너비를 유지 */
 }
 
 .news-detail__recommendations {
@@ -64,7 +77,7 @@
 .recommendation-item {
   display: flex;
   align-items: center;
-  margin-top: 10px;
+  margin: 20px 0; /* 위아래 마진 추가 */
 }
 
 .recommendation-label {
@@ -72,10 +85,10 @@
 }
 
 .recommendation-bar {
-  flex: 3;
-  height: 20px;
+  flex: 7;
+  height: 30px; /* 높이를 더 높게 설정 */
   background-color: #eee;
-  border-radius: 10px;
+  border-radius: 15px; /* 높이에 맞게 조정 */
   margin: 0 10px;
   overflow: hidden;
   position: relative; /* 둥근 끝부분을 유지하기 위해 추가 */
@@ -83,12 +96,12 @@
 
 .recommendation-bar-inner {
   height: 100%;
-  background-color: #7f27ff;
-  border-radius: 10px 0 0 10px;
-  border-radius: 10px; /* 둥근 끝부분을 유지하기 위해 수정 */
+  border-radius: 15px; /* 높이에 맞게 조정 */
 }
 
 .recommendation-percentage {
-  flex: 0.5;
+  flex: 1;
   text-align: right;
+  color: #7f27ff;
+  font-weight: bold;
 }
