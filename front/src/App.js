@@ -3,9 +3,17 @@ import { BrowserRouter as Router, useRoutes, Link } from 'react-router-dom'
 
 import './App.css'
 
+import axios from 'axios'
+
 import Header from './page/header'
 import NewsDetail from './page/newsDetail'
 
+const run = async () => {
+    let rs = await axios.get('api/news/detail')
+    console.log('rs : ', rs)
+}
+
+run()
 // const Home = () => (
 //     <div>
 //         <Link to="/">
@@ -43,7 +51,7 @@ const App = () => {
 const AppWrapper = () => {
     return (
         <Router>
-            <div className='container'>
+            <div className="container">
                 <Header />
                 <App />
             </div>
