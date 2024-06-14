@@ -26,20 +26,17 @@ const NewsDetail = () => {
 
         // 긍부정출력
         const clsResults = JSON.parse(data.cls_results);
-
         const labelMap = {
           negative: "부정",
           neutral: "중립",
           positive: "긍정",
         };
-
         const formattedClsResults = Object.keys(clsResults)
           .map((key) => ({
             label: labelMap[key], // label값을 반환
             percentage: (clsResults[key] * 100).toFixed(2), //퍼센트 형식으로 반환
           }))
           .sort((a, b) => b.percentage - a.percentage); // 내림차순정렬
-
         setSortedRecommendations(formattedClsResults);
 
         // 현재회사와의 관련기사 설정
@@ -68,23 +65,55 @@ const NewsDetail = () => {
       <div className="blank compBg"></div>
       <div className="newsDetailWrap compBg">
         <div className="go-to-back">
-          <div>
+          <div className="up-left">
+            <div>
+              {ThemeMode === "dark" ? (
+                <img
+                  className="back-arrow"
+                  src="./static/back_arrow_dark.png"
+                  alt=""
+                />
+              ) : (
+                <img
+                  className="back-arrow"
+                  src="./static/back_arrow.png"
+                  alt=""
+                />
+              )}
+            </div>
+            <img className="small-img" src={selectedArticle.img} alt="title" />
+            <span className="small-title">{selectedArticle.title}</span>
+          </div>
+          <div className="up-right">
             {ThemeMode === "dark" ? (
               <img
-                className="back-arrow"
-                src="./static/back_arrow_dark.png"
+                className="up__views_img"
+                src="./static/view-dark.png"
                 alt=""
               />
             ) : (
               <img
-                className="back-arrow"
-                src="./static/back_arrow.png"
+                className="up__views_img"
+                src="./static/view-light.png"
                 alt=""
               />
             )}
+            <div className="up-views purCard">{selectedArticle.views}</div>
+            {ThemeMode === "dark" ? (
+              <img
+                className="up__like_img"
+                src="./static/heart-dark.png"
+                alt=""
+              />
+            ) : (
+              <img
+                className="up__like_img"
+                src="./static/heart-light.png"
+                alt=""
+              />
+            )}
+            <div className="up-like purCard">{selectedArticle.like}</div>
           </div>
-          <img className="small-img" src={selectedArticle.img} alt="title" />
-          <span className="small-title">{selectedArticle.title}</span>
         </div>
         <img
           src={selectedArticle.img}
@@ -121,15 +150,17 @@ const NewsDetail = () => {
                     }}
                   ></div>
                 </div>
-                <span className="recommendation-percentage">
+                <span className="recommendation-percentage recText">
                   {rec.percentage}%
                 </span>
               </li>
             ))}
           </ul>
         </div>
-        <div className="related-articles">
-          <h3>같이 보면 좋을 뉴스</h3>
+        <div>
+          <h2 className="related-articles">
+            {selectedArticle.company_name} 과 관련된 최근 기사
+          </h2>
           <div className="related-articles__list">
             {relatedArticles.map((article, index) => (
               <NewsCard
@@ -138,6 +169,8 @@ const NewsDetail = () => {
                 title={article.title}
                 summary={article.summary}
                 date={article.date}
+                views={article.views}
+                like={article.like}
               />
             ))}
           </div>

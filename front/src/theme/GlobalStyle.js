@@ -13,5 +13,8 @@ export const GlobalStyle = createGlobalStyle`
 	.bgColor { background: ${({ theme }) => theme.bgColor} }
 	.ftColor { color: ${({ theme }) => theme.textColor} }
 	.recBar { background-color: ${({ theme }) => theme.recommandationBar}}
+	.purCard {color : ${({ theme }) => theme.purCard}}
+	.recPercentage {background-color : ${({ theme }) => theme.recPercentage}}
+	.recText {color :  ${({ theme }) => theme.recText}}
 
 `;
