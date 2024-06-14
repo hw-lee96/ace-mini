@@ -1,25 +1,33 @@
-/* 디테일 상단 바 */
 .bodyWrap {
   display: flex;
-  justify-content: flex-end; /* 오른쪽 정렬 */
+  flex-direction: column;
   overflow-x: hidden; /* 수평 스크롤 숨기기 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  justify-content: relative;
 }
 
 .blank {
   flex: 1.2;
 }
-.up-left {
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-}
+
+/* 디테일 상단 바 */
+
 .go-to-back {
+  width: 30.5%;
+  position: fixed;
+  height: 40px;
   align-items: center;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-right: 10px;
-  margin-bottom: 20px;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+.up-left {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
 }
 
 .small-img {
@@ -30,10 +38,12 @@
 }
 
 .small-title {
-  margin-top: 11px;
   margin-left: 10px;
-  margin-bottom: 10px;
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap; /* 텍스트를 한 줄로 */
+  overflow: hidden; /* 텍스트가 넘칠 경우 숨김 */
+  text-overflow: ellipsis; /* 넘친 텍스트를 ...으로 표시 */
 }
 .up-right {
   align-items: center;
@@ -69,13 +79,10 @@
 }
 
 /* detail 본문 */
-
 .newsDetailWrap {
-  /* width: 45%; 반만 차지하도록 설정 */
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  overflow-y: auto; /* 세로 스크롤 허용 */
+  height: calc(100% - 60px); /* 고정된 헤더 높이를 제외한 높이 설정 */
+  overflow-y: auto; /*세로 스크롤 허용*/
 }
 
 .news-detail__image {
