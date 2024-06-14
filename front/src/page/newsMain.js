@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { BrowserRouter as Router, useRoutes, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './newsMain.css'
 
 import NewsCarousel from './component/newsCarousel'
