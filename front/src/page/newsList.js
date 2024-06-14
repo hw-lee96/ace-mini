@@ -46,7 +46,8 @@ const NewsList = () => {
 
     return (
         <div className="news-list-container">
-            <div>
+            <div className='dimm' onClick={()=>setIsOpen(false)}></div>
+            <div className='news-list-box'>
                 <div className="news-filter bgColor">
                     <div className={type == '' ? 'active' : ''} onClick={getAllNewsList}>
                         전체
@@ -66,7 +67,7 @@ const NewsList = () => {
                         {newsList.map((news, i) => {
                             return (
                                 <div key={i}>
-                                    <div className="item compBg ftColor" onClick={() => handleItemClick(news.id)}>
+                                    <div className="itemWrap compBg ftColor" onClick={() => handleItemClick(news.id)}>
                                         <div className="item compBg">
                                             <div className="img-box">
                                                 <img
