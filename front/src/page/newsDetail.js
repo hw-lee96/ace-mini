@@ -157,7 +157,7 @@ const NewsDetail = () => {
         />
         <h2 className="news-detail__title">{selectedArticle.title}</h2>
         <p className="news-detail__media">{selectedArticle.media}</p>
-        <p>📝[한 줄 요약] </p>
+        <p className="news-detail__content-title">📝[한 줄 요약] </p>
         <p className="news-detail__content">{selectedArticle.summary} </p>
         <p className="news-detail__date">{selectedArticle.date}</p>
 
@@ -171,7 +171,7 @@ const NewsDetail = () => {
           </a>
         )}
         <div className="news-detail__recommendations">
-          <h3>이 뉴스의 평가</h3>
+          <h3 className="related-articles">이 뉴스의 평가</h3>
           <ul>
             {sortedRecommendations.map((rec, index) => (
               <li key={index} className="recommendation-item">
@@ -194,7 +194,7 @@ const NewsDetail = () => {
         </div>
         <div>
           <h2 className="related-articles">
-            🏢 [{selectedArticle.company_name}] 과 관련된 최근 기사
+            🏢 [{selectedArticle.company_name}] 와(과) 관련된 최근 기사
           </h2>
           <div className="related-articles__list">
             {relatedArticles.map((article, index) => (

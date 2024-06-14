@@ -25,6 +25,9 @@
   margin-top: 10px;
   font-size: 16px;
   margin: 10px 0 5px;
+  line-height: 18px;
+  font-weight: 700;
+  /* color: #2c2d2e; */
 }
 
 .date_like {
@@ -34,7 +37,7 @@
 }
 .news-card__date {
   margin-top: 10px;
-  color: #888;
+  color: #a1a4a7;
   font-size: 12px;
   margin-bottom: 10px;
 }
@@ -59,6 +62,8 @@
   margin-bottom: 10px;
 }
 .news-card__snippet {
-  margin-top: 10px;
+  margin-top: 13px;
   font-size: 14px;
+  line-height: 18px;
+  color: #77797c;
 }
