@@ -37,7 +37,7 @@ const Main = () => {
                     </div>
                 </div>
             </div>
-            <div className="news-main-footer fixed-bottom">
+            <div className="news-main-footer fixed-bottom bgColor">
                 <div className="info">
                     <div>더 자세하고 많은 뉴스가</div>
                     <div>궁금하다면?</div>
