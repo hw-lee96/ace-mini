@@ -34,8 +34,8 @@ import NewsMain from "./page/newsMain";
 
 const App = () => {
   return useRoutes([
-    { path: "/", element: <NewsList /> },
-    { path: "/main", element: <NewsMain /> },
+    { path: "/", element: <NewsMain /> },
+    { path: "/list", element: <NewsList /> },
     { path: "/:id", element: <NewsDetail /> },
     // { path: '/exer/hw', element: <Todo2 /> },
     // { path: '/exer/jh', element: <Todo3 /> },
