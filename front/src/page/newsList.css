@@ -68,11 +68,15 @@
 }
 
 .news-filter {
+    position: fixed;
+    top: 50px;
+    width: 67%;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
     padding: 20px 0 28px 0;
+    z-index: 2;
 }
 .news-filter > div {
     width: 76px;
@@ -98,9 +102,9 @@
     position: fixed;
     visibility: hidden;
     top: 141px;
-    right: -34%;
-    width: 34%;
-    height: 100%;
+    right: -32%;
+    width: 33%;
+    height: 70%;
     background-color: #f0f0f0;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
     transition: right 0.3s ease-in-out;
@@ -108,7 +112,7 @@
     overflow: scroll;
     -ms-overflow-style: none; /* 인터넷 익스플로러 */
     scrollbar-width: none; /* 파이어폭스 */
-    margin-right: 16.66vw;
+    margin-right: 15.66vw;
     border-radius: 15px;
 }
 
@@ -117,9 +121,16 @@
     right: 0;
 }
 
+.news-list-wrap {
+    margin-top: 90px;
+}
+
+/* .list-cover {
+    position: fixed;
+    left:0;
+} */
 .news-list-wrap.open { 
     width: 50%;
-    transition: right 1s ease-in-out;
 }
 
 .news-list-container {

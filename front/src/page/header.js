@@ -7,7 +7,7 @@ const Header = () => {
     const [ThemeMode, toggleTheme] = useTheme()
 
     return (
-        <div className="headerWrap">
+        <div className="headerWrap bgColor">
             <div className="logoWrap">
                 <Link to="/" className="ftColor">
                     {ThemeMode == 'dark' ? (
