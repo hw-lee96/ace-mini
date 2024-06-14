@@ -11,16 +11,16 @@ const Main = () => {
                     <div className='titleWrap'>
                         <div className='title'>사람들이 가장 좋아한 글</div>
                     </div>
-                    <div className='news-carousel'>
-                        <NewsCarousel />
+                    <div className="news-carousel">
+                        <NewsCarousel type="like"/>
                     </div>
                 </div>
                 <div className='most-viewed-news'>
                     <div className='titleWrap'>
                         <div className='title'>사람들이 가장 많이 본 글</div>
                     </div>
-                    <div className='news-carousel'>
-                        <NewsCarousel />
+                    <div className="news-carousel">
+                        <NewsCarousel type="view"/>
                     </div>
                 </div>
             </div>

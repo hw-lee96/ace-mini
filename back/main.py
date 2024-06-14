@@ -54,16 +54,18 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE"],  # 허용할 HTTP 메소드
     allow_headers=["*"],  # 모든 헤더를 허용할 경우
-    allow_origins=['http://localhost:3000/', 'http://127.0.0.1:3000/']
+    allow_origins=['http://localhost:3000', 'http://127.0.0.1:3000']
 )
 
 from route import news_detail
 from route import save_db_service
 from route import news_list
+from route import news_ranking
 
 app.include_router(news_detail.router)
 app.include_router(save_db_service.router)
 app.include_router(news_list.router)
+app.include_router(news_ranking.router)
 
 @app.get('/')
 async def home(request: Request):
