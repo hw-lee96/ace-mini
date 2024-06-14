@@ -4,7 +4,7 @@ import "./newsCard.css";
 
 const NewsCard = ({ img, title, date, summary }) => {
   const truncateText = (text, limit) => {
-    if (text.length > limit) {
+    if (text && text.length > limit) {
       return text.substring(0, limit) + "...";
     }
     return text;
