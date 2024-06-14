@@ -40,6 +40,12 @@
   display: flex;
   flex-direction: row;
 }
+.up-views-count {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+}
 .up__views_img {
   width: 18px;
 }
@@ -47,8 +53,15 @@
   margin-left: 4px;
 }
 
-.up__like_img {
+.handle-like {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
   margin-left: 10px;
+}
+
+.up__like_img {
   width: 18px;
 }
 .up-like {

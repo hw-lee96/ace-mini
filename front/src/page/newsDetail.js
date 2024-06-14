@@ -52,6 +52,19 @@ const NewsDetail = () => {
     get_detail();
   }, [id]);
 
+  //좋아요 수
+  const handleLike = async () => {
+    try {
+      const response = await axios.put(`api/news/like/${id}`);
+      setSelectedArticle((prevArticle) => ({
+        ...prevArticle,
+        like: response.data.new_like_count,
+      }));
+    } catch (e) {
+      console.error("좋아요 수 에러 : ", e);
+    }
+  };
+
   if (!selectedArticle) return <div> Loading......... </div>;
 
   // 퍼센트에 따라 색상을 계산하는 함수
@@ -85,34 +98,38 @@ const NewsDetail = () => {
             <span className="small-title">{selectedArticle.title}</span>
           </div>
           <div className="up-right">
-            {ThemeMode === "dark" ? (
-              <img
-                className="up__views_img"
-                src="./static/view-dark.png"
-                alt=""
-              />
-            ) : (
-              <img
-                className="up__views_img"
-                src="./static/view-light.png"
-                alt=""
-              />
-            )}
-            <div className="up-views purCard">{selectedArticle.views}</div>
-            {ThemeMode === "dark" ? (
-              <img
-                className="up__like_img"
-                src="./static/heart-dark.png"
-                alt=""
-              />
-            ) : (
-              <img
-                className="up__like_img"
-                src="./static/heart-light.png"
-                alt=""
-              />
-            )}
-            <div className="up-like purCard">{selectedArticle.like}</div>
+            <div className="up-views-count">
+              {ThemeMode === "dark" ? (
+                <img
+                  className="up__views_img"
+                  src="./static/view-dark.png"
+                  alt=""
+                />
+              ) : (
+                <img
+                  className="up__views_img"
+                  src="./static/view-light.png"
+                  alt=""
+                />
+              )}
+              <div className="up-views purCard">{selectedArticle.views}</div>
+            </div>
+            <div onClick={handleLike} className="handle-like">
+              {ThemeMode === "dark" ? (
+                <img
+                  className="up__like_img"
+                  src="./static/heart-dark.png"
+                  alt=""
+                />
+              ) : (
+                <img
+                  className="up__like_img"
+                  src="./static/heart-light.png"
+                  alt=""
+                />
+              )}
+              <div className="up-like purCard">{selectedArticle.like}</div>
+            </div>
           </div>
         </div>
         <img
