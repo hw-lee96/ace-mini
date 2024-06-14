@@ -1,4 +1,4 @@
-/* src/newsDetail.css */
+/* 디테일 상단 바 */
 .bodyWrap {
   display: flex;
   justify-content: flex-end; /* 오른쪽 정렬 */
@@ -8,11 +8,16 @@
 .blank {
   flex: 1.2;
 }
-
+.up-left {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
 .go-to-back {
   align-items: center;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   margin-right: 10px;
   margin-bottom: 20px;
 }
@@ -30,11 +35,31 @@
   margin-bottom: 10px;
   font-size: 15px;
 }
+.up-right {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+.up__views_img {
+  width: 18px;
+}
+.up-views {
+  margin-left: 4px;
+}
+
+.up__like_img {
+  margin-left: 10px;
+  width: 18px;
+}
+.up-like {
+  margin-left: 4px;
+}
+
+/* detail 본문 */
 
 .newsDetailWrap {
   width: 45%; /* 반만 차지하도록 설정 */
   padding: 20px;
-  background-color: #ffffff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow-y: auto; /* 세로 스크롤 허용 */
@@ -104,6 +129,13 @@
 .news-detail__button:hover {
   background-color: #704eff;
   color: #fff;
+  border: solid #704eff 1px;
+}
+
+.dark-mode__button:hover {
+  background-color: #8d72ff;
+  color: #fff;
+  border: solid #8d72ff 1px;
 }
 
 .news-detail__recommendations {
@@ -142,12 +174,13 @@
 .recommendation-percentage {
   flex: 1;
   text-align: right;
-  color: #704eff;
   font-weight: bold;
 }
 
 .related-articles {
   margin-top: 60px;
+  margin-bottom: 20px;
+  font-weight: bold;
 }
 
 .related-articles__list {
