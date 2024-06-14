@@ -19,21 +19,24 @@
 .news-card__content {
   padding: 10px;
   overflow: hidden;
-  flex: 1
+  flex: 1;
 }
 
 .news-card__title {
+  margin-top: 10px;
   font-size: 16px;
   margin: 10px 0 5px;
 }
 
 .news-card__date {
+  margin-top: 10px;
   color: #888;
   font-size: 12px;
   margin-bottom: 10px;
 }
 
 .news-card__snippet {
+  margin-top: 10px;
   font-size: 14px;
   color: #333;
 }
