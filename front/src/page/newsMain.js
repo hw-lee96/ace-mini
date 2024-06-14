@@ -1,28 +1,49 @@
 import React, { useState } from 'react'
+import { BrowserRouter as Router, useRoutes, Link } from 'react-router-dom'
 import './newsMain.css'
 
 import NewsCarousel from './component/newsCarousel'
+import { useTheme } from '../theme/themeProvider'
 
 const Main = () => {
+    const [ThemeMode, toggleTheme] = useTheme()
+
     return (
-        <div className='mainWrap'>
-            <div className='content'>
-                <div className='most-liked-news'>
-                    <div className='titleWrap'>
-                        <div className='title'>사람들이 가장 좋아한 글</div>
+        <div className="mainWrap">
+            <div className="content">
+                <div className="most-liked-news">
+                    <div className="titleWrap">
+                        <div className="title">사람들이 가장 좋아한 글</div>
                     </div>
-                    <div className='news-carousel'>
+                    <div className="news-carousel">
                         <NewsCarousel />
                     </div>
                 </div>
-                <div className='most-viewed-news'>
-                    <div className='titleWrap'>
-                        <div className='title'>사람들이 가장 많이 본 글</div>
+
+                <div className="most-viewed-news">
+                    <div className="titleWrap">
+                        <div className="title">사람들이 가장 많이 본 글</div>
                     </div>
-                    <div className='news-carousel'>
+                    <div className="news-carousel">
                         <NewsCarousel />
                     </div>
                 </div>
+            </div>
+            <div className="news-main-footer">
+                <div className="info">
+                    <div>더 자세하고 많은 뉴스가</div>
+                    <div>궁금하다면?</div>
+                </div>
+                <Link to="/list" className='ftColor'>
+                    <div className="move-btn">
+                        보러가기
+                        {ThemeMode == 'dark' ? (
+                            <img className="darkBtn" src="./static/halfArrow_dark.png" alt="" />
+                        ) : (
+                            <img className="lightBtn" src="./static/halfArrow_light.png" alt="" />
+                        )}
+                    </div>
+                </Link>
             </div>
         </div>
     )
