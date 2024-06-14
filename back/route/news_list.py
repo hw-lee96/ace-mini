@@ -17,6 +17,7 @@ router = APIRouter(
 
 news_collection = db['news']
 
+
 @router.get("/pinbert/{result}")
 def get_news_list(result : str):
    
