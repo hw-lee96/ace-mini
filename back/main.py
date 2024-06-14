@@ -57,13 +57,13 @@ app.add_middleware(
     allow_origins=['http://localhost:3000/', 'http://127.0.0.1:3000/']
 )
 
-from route import news_detail, save_db_service, news_list, news_views
-
+from route import news_detail, save_db_service, news_list, news_views, news_ranking
 
 app.include_router(news_detail.router)
 app.include_router(save_db_service.router)
 app.include_router(news_list.router)
 app.include_router(news_views.router)
+app.include_router(news_ranking.router)
 
 @app.get('/')
 async def home(request: Request):
