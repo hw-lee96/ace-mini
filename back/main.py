@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Request, Depends, Form, status
 from fastapi.responses import RedirectResponse
+from datetime import datetime
 
 # 미들 웨어 관련
 from fastapi.middleware.cors import CORSMiddleware
@@ -17,11 +18,10 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 save_db_dir = os.path.join(current_dir, 'save_DB')
 sys.path.append(save_db_dir)
 
-# 이제 'save_DB' 폴더 내의 모듈을 import할 수 있습니다.
+# save_DB 폴더 내의 모듈을 import
 import save_db_main
 
-
-
+import stock_news_crawler
 
 # .env 파일의 변수를 프로그램 환경변수에 추가
 load_dotenv()
@@ -51,6 +51,26 @@ news = db.news
 # news = db['news'].find_one({'name' : 'duck'})
 # print('### news : ', news)
 
+# 날짜 변환 함수
+def convert_date(date_str):
+    try:
+        # 가능한 여러 날짜 형식들
+        date_formats = ["%Y-%m-%d", "%Y.%m.%d %H:%M", "%Y.%m.%d %H:%M:%S","%Y.%m.%d %H:%M:%S.%f", "%Y.%m.%d"]
+        
+        # 주어진 모든 형식들에 대해 시도
+        for date_format in date_formats:
+            try:
+                return datetime.strptime(date_str, date_format).date()
+            except ValueError:
+                continue
+        
+        # 모든 형식에 대해 변환 실패 시, 예외 처리
+        raise ValueError(f"Invalid date format: {date_str}")
+    
+    except Exception as e:
+        print(f"날짜 변환 실패: {e}")
+        return None  # 날짜 변환 실패 시 None을 반환하거나 다른 처리 방법을 선택할 수 있습니다
+
 # CORS 설정
 app.add_middleware(
     CORSMiddleware,
@@ -64,35 +84,56 @@ from route import news_detail
 app.include_router(news_detail.router)
 
 @app.get("/save/db")
-async def add() : 
+async def add() :
 
-    news = db['news']
+    try:
+        company = input("종목 이름이나 코드 입력: ")     
+        maxpage = input("최대 뉴스 페이지 수 입력: ")
+        start_date_str = input("시작 날짜 (YYYY-MM-DD): ")
+        end_date_str = input("종료 날짜 (YYYY-MM-DD): ")
 
-    
-    articls = save_db_main.save_main()
-    i = 1
-    for article in articls:
-        new_article = {
-            'company_code':article['company_code'],
-            'date': article['date'],
-            'media': article['media'],
-            'title': article['title'],
-            'link': article['link'],
-            'content': article['content'],
-            'img': article['img'],
-            'summary': article['summary'],
-            'cls_results': article['cls_results'],
-            'result': article['result'],
-            'reg_user':'jh'
-        }
-        
-        news.insert_one(new_article)
-        print(i)
-        i+=1
-     
-  
+        # 시작 날짜와 종료 날짜를 datetime 객체로 변환
+        start_date = convert_date(start_date_str)
+        end_date = convert_date(end_date_str)
 
-    return 2
+        if not (start_date and end_date):
+            print("올바른 날짜 형식(YYYY-MM-DD)으로 입력하세요.")
+            return {"error": "Invalid date format"}
+
+        # convert_to_code 함수 호출 시 시작 날짜와 종료 날짜 추가 전달
+        articles = convert_to_code(company, maxpage, start_date, end_date)
+
+        if not articles:
+            print("뉴스 데이터를 가져오지 못했습니다.")
+            return {"error": "Failed to fetch news data"}
+
+        i = 1
+        for article in articles:
+            new_article = {
+                'company_code': article['company_code'],
+                'date': article['date'],
+                'media': article['media'],
+                'title': article['title'],
+                'link': article['link'],
+                'content': article['content'],
+                'img': article['img'],
+                'summary': article['summary'],
+                'cls_results': article['cls_results'],
+                'result': article['result'],
+                'reg_user': 'jh'
+            }
+            
+            if new_article['date'] is not None:  # 유효한 날짜만 삽입
+                news_collection.insert_one(new_article)
+                print(f"Inserted article {i}")
+                i += 1
+            else:
+                print(f"Skipping article due to invalid date: {article}")
+
+        return {"message": "Data successfully saved"}
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return {"error": str(e)}
 
 
 @app.get('/')
@@ -127,25 +168,29 @@ async def news(question: str):
 
 @app.get('/news2')
 async def news2():
-    # 요약하고자 하는 기사를 입력합니다.
-    news_text = "10일 서울외국환중개에 따르면 이날 환율은 오전 9시 27분 기준 전 거래일 종가(1365.3원)보다 15.7원 오른 1381.0원에 거래 중이다. 간밤 뉴욕차액결제선물환(NDF) 시장에서 거래된 원·달러 1개월물은 1378.0원에 최종 호가됐다. 최근 1개월물 스와프 포인트(-2.25원)를 고려하면 이날 환율은 전 거래일 종가(1365.3원) 대비 14.95원 상승 개장할 것으로 예상됐다. 이날 환율은 역외 환율을 반영해 전 거래일 종가보다 14.2원 오른 1379.5원에 개장했다. 이후 환율은 1380원대로 올라 움직이고 있다. 5월 미국의 비농업 일자리는 전월 대비 27만2000개 늘었다. 다우존스가 집계한 전문가 전망치 18만개와 전월 증가 폭 17만5000개를 큰 폭으로 웃돈 것이다. 비농업 부문 민간 임금근로자의 시간당 평균 소득은 14센트(0.4%) 증가한 34.91달러를 기록했다. 이는 지난달 상승폭(0.2%)의 두배에 달하는 수치다. 전년 동기 대비로도 4.1% 올랐다. 다만 5월 실업률은 4.0%로, 4월(3.9%)보다 소폭 올라갔다. 시카고상품거래소(CME) 페드워치에 따르면 9월 금리가 인하될 확률은 49%로 뚝 떨어졌다. 지난주 만 해도 약 70%를 가리켰다. 12월 기준금리가 5.0% 이하로 떨어질 확률은 45.5% 정도다. 달러화는 다시 강세를 나타냈다. 달러인덱스는 9일(현지시간) 저녁 8시 27분 기준 105.11을 기록하고 있다. 지난주 104에서 105로 오른 것이다. 아시아 통화는 약세다. 달러·위안 환율은 7.26위안대, 달러·엔 환율은 156엔대에서 거래되고 있다. 장 초반 외국인 투자자는 국내 증시에서 순매도하고 있다. 외국인은 코스피 시장에서 800억원대, 코스닥 시장에서 700억원대를 팔고 있다."
+    try:
+        # 요약하고자 하는 기사를 입력합니다.
+        news_text = "10일 서울외국환중개에 따르면 이날 환율은 오전 9시 27분 기준 전 거래일 종가(1365.3원)보다 15.7원 오른 1381.0원에 거래 중이다. 간밤 뉴욕차액결제선물환(NDF) 시장에서 거래된 원·달러 1개월물은 1378.0원에 최종 호가됐다. 최근 1개월물 스와프 포인트(-2.25원)를 고려하면 이날 환율은 전 거래일 종가(1365.3원) 대비 14.95원 상승 개장할 것으로 예상됐다. 이날 환율은 역외 환율을 반영해 전 거래일 종가보다 14.2원 오른 1379.5원에 개장했다. 이후 환율은 1380원대로 올라 움직이고 있다. 5월 미국의 비농업 일자리는 전월 대비 27만2000개 늘었다. 다우존스가 집계한 전문가 전망치 18만개와 전월 증가 폭 17만5000개를 큰 폭으로 웃돈 것이다. 비농업 부문 민간 임금근로자의 시간당 평균 소득은 14센트(0.4%) 증가한 34.91달러를 기록했다. 이는 지난달 상승폭(0.2%)의 두배에 달하는 수치다. 전년 동기 대비로도 4.1% 올랐다. 다만 5월 실업률은 4.0%로, 4월(3.9%)보다 소폭 올라갔다. 시카고상품거래소(CME) 페드워치에 따르면 9월 금리가 인하될 확률은 49%로 뚝 떨어졌다. 지난주 만 해도 약 70%를 가리켰다. 12월 기준금리가 5.0% 이하로 떨어질 확률은 45.5% 정도다. 달러화는 다시 강세를 나타냈다. 달러인덱스는 9일(현지시간) 저녁 8시 27분 기준 105.11을 기록하고 있다. 지난주 104에서 105로 오른 것이다. 아시아 통화는 약세다. 달러·위안 환율은 7.26위안대, 달러·엔 환율은 156엔대에서 거래되고 있다. 장 초반 외국인 투자자는 국내 증시에서 순매도하고 있다. 외국인은 코스피 시장에서 800억원대, 코스닥 시장에서 700억원대를 팔고 있다."
 
-    # 토크나이저를 사용하여 뉴스기사 원문을 모델이 인식할 수 있는 토큰형태로 바꿔줍니다.
-    input_ids = tokenizer.encode(news_text, return_tensors="pt")
+        # 토크나이저를 사용하여 뉴스기사 원문을 모델이 인식할 수 있는 토큰형태로 바꿔줍니다.
+        input_ids = tokenizer.encode(news_text, return_tensors="pt")
 
-    # 모델에 넣기 전 문장의 시작과 끝을 나타내는 토큰을 추가합니다.
-    input_ids = torch.cat([torch.tensor([[tokenizer.bos_token_id]]), input_ids, torch.tensor([[tokenizer.eos_token_id]])], dim=1)
+        # 모델에 넣기 전 문장의 시작과 끝을 나타내는 토큰을 추가합니다.
+        input_ids = torch.cat([torch.tensor([[tokenizer.bos_token_id]]), input_ids, torch.tensor([[tokenizer.eos_token_id]])], dim=1)
 
-    # 모델을 사용하여 요약을 생성합니다.
-    summary_text_ids = model.generate(
-        input_ids=input_ids,
-        length_penalty=1.0,  # 길이에 대한 penalty값. 1보다 작은 경우 더 짧은 문장을 생성하도록 유도하며, 1보다 클 경우 길이가 더 긴 문장을 유도
-        max_length=300,      # 요약문의 최대 길이 설정
-        min_length=32,       # 요약문의 최소 길이 설정
-        num_beams=4,         # 문장 생성시 다음 단어를 탐색하는 영역의 개수 
+        # 모델을 사용하여 요약을 생성합니다.
+        summary_text_ids = model.generate(
+            input_ids=input_ids,
+            length_penalty=1.0,  # 길이에 대한 penalty값. 1보다 작은 경우 더 짧은 문장을 생성하도록 유도하며, 1보다 클 경우 길이가 더 긴 문장을 유도
+            max_length=300,      # 요약문의 최대 길이 설정
+            min_length=32,       # 요약문의 최소 길이 설정
+            num_beams=4,         # 문장 생성시 다음 단어를 탐색하는 영역의 개수 
     )
 
     # 요약문을 출력합니다.
-    news = tokenizer.decode(summary_text_ids[0], skip_special_tokens=True)
-    print(news)
-    return { 'news': news }
+        news_summary = tokenizer.decode(summary_text_ids[0], skip_special_tokens=True)
+        print(news_summary)
+        return {'news': news_summary}
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return {"error": str(e)}

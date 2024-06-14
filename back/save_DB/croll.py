@@ -130,11 +130,3 @@ def convert_to_code(company, maxpage):
     else:                                                # Input에 종목코드로 넣었을 때       
         company_code = str(company)      
         return crawler(company_code, maxpage)  #
-        
-           
-
- 
-
- 
- 
- 
