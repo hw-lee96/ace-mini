@@ -21,7 +21,7 @@ const Main = () => {
             <div className="content">
                 <div className="most-liked-news newsWrap">
                     <div className="titleWrap">
-                        <div className="title">사람들이 가장 좋아한 글</div>
+                        <div className="title">사람들이 가장 좋아한 뉴스</div>
                     </div>
                     <div className="news-carousel">
                         <NewsCarousel type="like"/>
@@ -30,7 +30,7 @@ const Main = () => {
 
                 <div className="most-viewed-news newsWrap">
                     <div className="titleWrap">
-                        <div className="title">사람들이 가장 많이 본 글</div>
+                        <div className="title">사람들이 가장 많이 본 뉴스</div>
                     </div>
                     <div className="news-carousel">
                         <NewsCarousel type="view"/>

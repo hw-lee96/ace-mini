@@ -1,84 +1,96 @@
-import React, { useState, useEffect } from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Pagination, Autoplay } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
-import './newsCarousel.css'
-import axios from 'axios'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect, useRef } from "react";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import "./newsCarousel.css";
+import axios from "axios";
 
-import NewsCard from './newsCard'
-import useStore from '../../commonStore'
+import NewsCard from "./newsCard";
 
 async function getArticles(type) {
     try {
-        const response = await axios.get(`api/news/ranking/${type}`)
-        return response.data
+        const response = await axios.get(`api/news/ranking/${type}`);
+        console.log(response.data)
+        return response.data;
+
     } catch (error) {
-        console.error('Error fetching data:', error)
-        return []
+        console.error('Error fetching data:', error);
+        return [];
     }
 }
 
 function NewsCarousel({ type }) {
+    const prevRef = useRef(null);
+    const nextRef = useRef(null);
+
     const [relatedArticles, setRelatedArticles] = useState([])
-    const { setNewsId, setIsOpen } = useStore()
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await getArticles(type)
+                const data = await getArticles(type);
                 if (data && data.length > 0) {
-                    setRelatedArticles(data)
+                    setRelatedArticles(data);
                 } else {
-                    console.warn('Fetched data is empty:', data)
+                    console.warn('Fetched data is empty:', data);
                 }
             } catch (error) {
-                console.error('Error fetching data:', error)
+                console.error("Error fetching data:", error);
             }
-        }
+        };
 
-        fetchData()
-    }, [])
+        fetchData();
+    }, []);
 
     // 데이터가 비어있는 경우 처리
     if (relatedArticles.length === 0) {
-        return <div>Loading...</div>
+        return <div>Loading...</div>;
     }
 
     return (
-        <div>
-            <Swiper
-                modules={[Navigation, Pagination, Autoplay]}
-                loop={true}
-                slidesPerView={1.9}
-                spaceBetween={20}
-                navigation={true}
-                pagination={true}
-                centeredSlides={true}
-                autoplay={{
-                    delay: 2500,
-                }}
-                style={{ width: '100%', height: '300px' }}
-            >
-                {relatedArticles.map((article) => (
-                    <SwiperSlide key={article._id}>
-                        <Link to="/list" className="ftColor">
-                            <NewsCard
-                                img={article.img}
-                                title={article.title}
-                                summary={article.summary}
-                                date={article.date}
-                                onClick={() => {
-                                    setNewsId(article._id)
-                                    setIsOpen(true)
-                                }}
-                            />
-                        </Link>
-                    </SwiperSlide>
-                ))}
-            </Swiper>
+        <div className="swiper-container">
+            <div className="swiper-wrapper">
+                <div className="swiper-button-prev custom-nav-button" ref={prevRef}>
+                    <img src="/static/prevBtn.png" alt="Previous" />
+                </div>
+                <div className="swiper-button-next custom-nav-button" ref={nextRef}>
+                    <img src="/static/nextBtn.png" alt="Next" />
+                </div>
+                <Swiper
+                    modules={[Navigation, Autoplay]}
+                    loop={true}
+                    slidesPerView={1.9}
+                    spaceBetween={20}
+                    navigation={{
+                        prevEl: prevRef.current,
+                        nextEl: nextRef.current,
+                    }}
+                    onInit={(swiper) => {
+                        swiper.params.navigation.prevEl = prevRef.current;
+                        swiper.params.navigation.nextEl = nextRef.current;
+                        swiper.navigation.init();
+                        swiper.navigation.update();
+                    }}
+                    centeredSlides={true}
+                    autoplay={{
+                        delay: 2500,
+                    }}
+                    style={{ width: '100%', height: '300px' }}
+                >
+                    {relatedArticles.map((article) => (
+                        <SwiperSlide key={article._id}>
+                                <NewsCard
+                                    img={article.img}
+                                    title={article.title}
+                                    summary={article.summary}
+                                    date={article.date}
+                                />
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            </div>
         </div>
     )
 }

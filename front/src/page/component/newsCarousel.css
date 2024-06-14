@@ -1,7 +1,10 @@
 .swiper-container {
   width: 100%;
   padding: 20px;
+  overflow: visible;
+  position: relative; /* position relative 추가 */
 }
+
 
 .swiper-slide {
   background-color: #fff; /* 카드 배경색 설정 */
@@ -18,5 +21,45 @@
   transform: scale(0.1); /* 양 옆의 슬라이드는 작게 표시 */
   opacity: 0.5; /* 투명도 설정 */
   z-index: 1; /* 활성화된 슬라이드 위에 배치 */
+}
+
+.swiper-wrapper-container {
+  position: relative;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  position: absolute !important; /* !important 추가 */
+  top: -40px !important; /* !important 추가 */
+  z-index: 10;
+}
+
+.swiper-button-next {
+  right: 10px !important; /* !important 추가 */
+}
+
+.swiper-button-prev {
+  left: 880px;
+}
+
+.custom-nav-button img {
+  width: 30px; /* 원하는 이미지 크기로 조정 */
+  height: 30px; /* 원하는 이미지 크기로 조정 */
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  display: none;
+}
+
+/* newsCarousel.css */
+.card-link {
+    display: block;
+    text-decoration: none; /* 링크의 밑줄 제거 */
+    color: inherit; /* 링크 텍스트 색상을 상속 */
+}
+
+.card-link:hover {
+    text-decoration: none; /* 링크를 호버할 때 밑줄 제거 */
 }
 
