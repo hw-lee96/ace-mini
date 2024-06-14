@@ -66,3 +66,15 @@ async def get_related_news(company_name : str, exclude_id: str):
  
     return related_articles
 
+
+@router.put('/like/{id}')
+async def update_like_count(id: str):
+    
+    article= news_collection.find_one({"_id" :ObjectId(id)})
+    if not article :
+         raise HTTPException(status_code=404, detail ="기사 없음")
+    new_like_count = article.get('like', 0) + 1
+    
+    news_collection.update_one({"_id" : ObjectId(id)}, {"$set": {"like": new_like_count}})
+    
+    return {"id": id, "new_like_count": new_like_count}
