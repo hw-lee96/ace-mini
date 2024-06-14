@@ -4,25 +4,25 @@ import NewsCard from "./component/newsCard";
 import { useTheme } from "../theme/themeProvider";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import useStore from '../commonStore'
+import useStore from "../commonStore";
 
 const NewsDetail = () => {
   const [ThemeMode] = useTheme();
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [sortedRecommendations, setSortedRecommendations] = useState([]);
   const [relatedArticles, setRelatedArticles] = useState([]);
-  const { newsId, setNewsId, setIsOpen } = useStore()
+  const { newsId, setNewsId, setIsOpen } = useStore();
   const detailRef = useRef(null); //디테일부분을 참조하기 위한 useRef
 
-  const newsChange = article => {
-    setNewsId(article._id)
-  }
+  // const newsChange = (article) => {
+  //   setNewsId(article._id);
+  // };
   useEffect(() => {
     //특정 아이디로 api 호출
     const get_detail = async () => {
       try {
         if (!newsId || newsId == 0) {
-          return 
+          return;
         }
         let rs = await axios.get(`api/news/detail/${newsId}`);
         const data = rs.data;
@@ -54,8 +54,8 @@ const NewsDetail = () => {
         setRelatedArticles(relatedRs.data);
 
         // 스크롤을 최상단으로 이동
-        if (detailRef.current) {
-          detailRef.current.scrollTo(0, 0);
+        if (setNewsId) {
+          detailRef.current.scrollIntoView({ behavior: "smooth" });
         }
       } catch (e) {
         console.error("에러낫슈", e);
@@ -87,63 +87,62 @@ const NewsDetail = () => {
 
   return (
     <div className="bodyWrap bgClass" ref={detailRef}>
-      <div className="blank compBg"></div>
-      <div className="newsDetailWrap compBg">
-        <div className="go-to-back">
-          <div className="up-left" onClick={() => setIsOpen(false)}>
-            <div>
-              {ThemeMode === "dark" ? (
-                <img
-                  className="back-arrow"
-                  src="./static/back_arrow_dark.png"
-                  alt=""
-                />
-              ) : (
-                <img
-                  className="back-arrow"
-                  src="./static/back_arrow.png"
-                  alt=""
-                />
-              )}
-            </div>
-            <img className="small-img" src={selectedArticle.img} alt="title" />
-            <span className="small-title">{selectedArticle.title}</span>
+      <div className="go-to-back compBg">
+        <div className="up-left" onClick={() => setIsOpen(false)}>
+          <div>
+            {ThemeMode === "dark" ? (
+              <img
+                className="back-arrow"
+                src="./static/back_arrow_dark.png"
+                alt=""
+              />
+            ) : (
+              <img
+                className="back-arrow"
+                src="./static/back_arrow.png"
+                alt=""
+              />
+            )}
           </div>
-          <div className="up-right">
-            <div className="up-views-count">
-              {ThemeMode === "dark" ? (
-                <img
-                  className="up__views_img"
-                  src="./static/view-dark.png"
-                  alt=""
-                />
-              ) : (
-                <img
-                  className="up__views_img"
-                  src="./static/view-light.png"
-                  alt=""
-                />
-              )}
-              <div className="up-views purCard">{selectedArticle.views}</div>
-            </div>
-            <div onClick={handleLike} className="handle-like">
-              {ThemeMode === "dark" ? (
-                <img
-                  className="up__like_img"
-                  src="./static/heart-dark.png"
-                  alt=""
-                />
-              ) : (
-                <img
-                  className="up__like_img"
-                  src="./static/heart-light.png"
-                  alt=""
-                />
-              )}
-              <div className="up-like purCard">{selectedArticle.like}</div>
-            </div>
+          <img className="small-img" src={selectedArticle.img} alt="title" />
+          <span className="small-title">{selectedArticle.title}</span>
+        </div>
+        <div className="up-right">
+          <div className="up-views-count">
+            {ThemeMode === "dark" ? (
+              <img
+                className="up__views_img"
+                src="./static/view-dark.png"
+                alt=""
+              />
+            ) : (
+              <img
+                className="up__views_img"
+                src="./static/view-light.png"
+                alt=""
+              />
+            )}
+            <div className="up-views purCard">{selectedArticle.views}</div>
+          </div>
+          <div onClick={handleLike} className="handle-like">
+            {ThemeMode === "dark" ? (
+              <img
+                className="up__like_img"
+                src="./static/heart-dark.png"
+                alt=""
+              />
+            ) : (
+              <img
+                className="up__like_img"
+                src="./static/heart-light.png"
+                alt=""
+              />
+            )}
+            <div className="up-like purCard">{selectedArticle.like}</div>
           </div>
         </div>
+      </div>
+      <div className="newsDetailWrap compBg">
         <img
           src={selectedArticle.img}
           alt="hello"
@@ -200,7 +199,12 @@ const NewsDetail = () => {
                 date={article.date}
                 views={article.views}
                 like={article.like}
-                onClick={() => setNewsId(article._id)}
+                onClick={() => {
+                  setNewsId(article._id);
+                  if (detailRef.current) {
+                    detailRef.current.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
               />
             ))}
           </div>
