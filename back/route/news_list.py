@@ -31,10 +31,12 @@ def get_news_list(result : str):
 
     # 가져온 리스트를 꺼내 서 id를 문자열로 바꾼 후 배열에 저장 
     for news in sort_news_list:
-        news['_id'] = str(news['_id'])
+        news['id'] = str(news['_id'])
+        del news['_id']  # _id 필드를 삭제 (선택 사항)
         sort_cls_list.append(news)
 
-    # print(    sort_cls_list)
+
+    print(    sort_cls_list)
 
   
     # 결과 값 리턴
@@ -48,6 +50,7 @@ def get_news_list(result : str):
 def news_list_serializer(news) -> dict:
     return {
         "id" : str(news["_id"]),
+        "company_name" : news['company_name'],
         "title": news["title"],
         "date" : news["date"],
         "summary": news["summary"],
