@@ -57,4 +57,5 @@
     position: fixed;
     bottom: 0;
     width: 64vw;
+    z-index: 2;
 }
