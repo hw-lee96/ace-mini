@@ -28,13 +28,28 @@
   margin: 10px 0 5px;
 }
 
+.date_like {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .news-card__date {
   margin-top: 10px;
   color: #888;
   font-size: 12px;
   margin-bottom: 10px;
 }
-
+.news-card__like_img {
+  margin-left: 10px;
+  width: 13px;
+}
+.news-card__like {
+  margin-left: 3px;
+  margin-top: 10px;
+  font-size: 12px;
+  margin-bottom: 10px;
+  color: #8d72ff;
+}
 .news-card__snippet {
   margin-top: 10px;
   font-size: 14px;

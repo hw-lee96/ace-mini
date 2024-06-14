@@ -26,20 +26,17 @@ const NewsDetail = () => {
 
         // 긍부정출력
         const clsResults = JSON.parse(data.cls_results);
-
         const labelMap = {
           negative: "부정",
           neutral: "중립",
           positive: "긍정",
         };
-
         const formattedClsResults = Object.keys(clsResults)
           .map((key) => ({
             label: labelMap[key], // label값을 반환
             percentage: (clsResults[key] * 100).toFixed(2), //퍼센트 형식으로 반환
           }))
           .sort((a, b) => b.percentage - a.percentage); // 내림차순정렬
-
         setSortedRecommendations(formattedClsResults);
 
         // 현재회사와의 관련기사 설정
@@ -138,6 +135,7 @@ const NewsDetail = () => {
                 title={article.title}
                 summary={article.summary}
                 date={article.date}
+                like={article.like}
               />
             ))}
           </div>

@@ -2,7 +2,7 @@
 import React from "react";
 import "./newsCard.css";
 
-const NewsCard = ({ img, title, date, summary }) => {
+const NewsCard = ({ img, title, date, like, summary }) => {
   const truncateText = (text, limit) => {
     if (text.length > limit) {
       return text.substring(0, limit) + "...";
@@ -16,7 +16,15 @@ const NewsCard = ({ img, title, date, summary }) => {
       <div className="news-card__content">
         <h4 className="news-card__title">{title}</h4>
         <p className="news-card__snippet">{truncateText(summary, 70)}</p>
-        <p className="news-card__date">{date}</p>
+        <div className="date_like">
+          <p className="news-card__date">{date}</p>
+          <img
+            className="news-card__like_img"
+            alt=""
+            src="./static/heart_light.png"
+          />
+          <p className="news-card__like">{like}</p>
+        </div>
       </div>
     </div>
   );
