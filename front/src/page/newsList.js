@@ -45,47 +45,49 @@ const NewsList = () => {
     }, [])
 
     return (
-        <div>
-            <div className="news-filter">
-                <div className={type == '' ? 'active' : ''} onClick={getAllNewsList}>
-                    전체
-                </div>
-                <div className={type == 'positive' ? 'active' : ''} onClick={() => filter('positive')}>
-                    긍정
-                </div>
-                <div className={type == 'neutral' ? 'active' : ''} onClick={() => filter('neutral')}>
-                    중립
-                </div>
-                <div className={type == 'negative' ? 'active' : ''} onClick={() => filter('negative')}>
-                    부정
-                </div>
-            </div>
-
+        <div className='news-list-container'>
             <div>
-                {newsList.map((news, i) => {
-                    return (
-                        <div key={i}>
-                            <div className="item compBg ftColor" onClick={() => handleItemClick(news.id)}>
-                                <div className="item compBg">
-                                    <div className="img-box">
-                                        <img src={news.img} alt="" />
-                                    </div>
-                                    <div className="article-container">
-                                        <div>
-                                            <div className="title">{news.title}</div>
-                                            <div className="content content-line-clamp">
-                                                <span className="gray-color content-font">
-                                                    📝[한 줄 요약]{news.summary}
-                                                </span>
-                                            </div>
+                <div className="news-filter">
+                    <div className={type == '' ? 'active' : ''} onClick={getAllNewsList}>
+                        전체
+                    </div>
+                    <div className={type == 'positive' ? 'active' : ''} onClick={() => filter('positive')}>
+                        긍정
+                    </div>
+                    <div className={type == 'neutral' ? 'active' : ''} onClick={() => filter('neutral')}>
+                        중립
+                    </div>
+                    <div className={type == 'negative' ? 'active' : ''} onClick={() => filter('negative')}>
+                        부정
+                    </div>
+                </div>
+
+                <div className={`news-list-wrap ${isOpen ? 'open' : ''}`}>
+                    {newsList.map((news, i) => {
+                        return (
+                            <div key={i}>
+                                <div className="item compBg ftColor" onClick={() => handleItemClick(news.id)}>
+                                    <div className="item compBg">
+                                        <div className="img-box">
+                                            <img src={news.img} alt="" />
                                         </div>
-                                        <div className="date-font">{news.date}</div>
+                                        <div className="article-container">
+                                            <div>
+                                                <div className={`title ${isOpen ? 'content-line-clamp-1' : ''}`}>{news.title}</div>
+                                                <div className="content content-line-clamp-2">
+                                                    <span className="gray-color content-font">
+                                                        📝[한 줄 요약]{news.summary}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div className="date-font">{news.date}</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    )
-                })}
+                        )
+                    })}
+                </div>
             </div>
             <div className={`panel ${isOpen ? 'open' : ''}`}>{newsId == 0 ? '' : <NewsDetail {...{ newsId }} />}</div>
         </div>

@@ -27,7 +27,14 @@
     margin-bottom: 6px;
     font-size: 18px;
 }
-.content-line-clamp {
+.content-line-clamp-1 {
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+.content-line-clamp-2 {
     display: -webkit-box;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -89,9 +96,10 @@
 /* SlidePanel */
 .panel {
     position: fixed;
-    top: 0;
-    right: -50%;
-    width: 50%;
+    visibility: hidden;
+    top: 141px;
+    right: -34%;
+    width: 49%;
     height: 100%;
     background-color: #f0f0f0;
     box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
@@ -100,8 +108,20 @@
     overflow: scroll;
     -ms-overflow-style: none; /* 인터넷 익스플로러 */
     scrollbar-width: none; /* 파이어폭스 */
+    /* margin-right: 16.66vw; */
+    border-radius: 15px;
 }
 
 .panel.open {
+    visibility: visible;
     right: 0;
+}
+
+.news-list-wrap.open { 
+    width: 50%;
+    transition: right 1s ease-in-out;
+}
+
+.news-list-container {
+    overflow-x: hidden;
 }
