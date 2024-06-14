@@ -69,16 +69,23 @@ const NewsList = () => {
                                     <div className="item compBg ftColor" onClick={() => handleItemClick(news.id)}>
                                         <div className="item compBg">
                                             <div className="img-box">
-                                                <img src={news.img} alt="" onError={(e) => e.target.src = "./static/img_not_found.jpg"}/>
+                                                <img
+                                                    src={news.img}
+                                                    alt=""
+                                                    onError={(e) => (e.target.src = './static/img_not_found.jpg')}
+                                                />
                                             </div>
                                             <div className="article-container">
+                                                <div className="company-name-font">
+                                                    🏢 관련성이 높은 기업 : {news.company_name}
+                                                </div>
                                                 <div>
                                                     <div className={`title ${isOpen ? 'content-line-clamp-1' : ''}`}>
                                                         {news.title}
                                                     </div>
                                                     <div className="content content-line-clamp-2">
                                                         <span className="gray-color content-font">
-                                                            📝[한 줄 요약]{news.summary}
+                                                            📝 [한 줄 요약] {news.summary}
                                                         </span>
                                                     </div>
                                                 </div>
@@ -92,9 +99,7 @@ const NewsList = () => {
                     </div>
                 </div>
             </div>
-            <div className={`panel ${isOpen ? 'open' : ''}`}>
-                {newsId == 0 ? '' : <NewsDetail />}
-            </div>
+            <div className={`panel ${isOpen ? 'open' : ''}`}>{newsId == 0 ? '' : <NewsDetail />}</div>
         </div>
     )
 }
