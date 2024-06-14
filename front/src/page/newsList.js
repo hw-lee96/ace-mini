@@ -92,7 +92,9 @@ const NewsList = () => {
                     </div>
                 </div>
             </div>
-            <div className={`panel ${isOpen ? 'open' : ''}`}>{newsId == 0 ? '' : <NewsDetail {...{ newsId }} />}</div>
+            <div className={`panel ${isOpen ? 'open' : ''}`}>
+                {newsId == 0 ? '' : <NewsDetail />}
+            </div>
         </div>
     )
 }
