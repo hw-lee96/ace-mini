@@ -69,7 +69,7 @@ const NewsList = () => {
                                     <div className="item compBg ftColor" onClick={() => handleItemClick(news.id)}>
                                         <div className="item compBg">
                                             <div className="img-box">
-                                                <img src={news.img} alt="" />
+                                                <img src={news.img} alt="" onError={(e) => e.target.src = "./static/img_not_found.jpg"}/>
                                             </div>
                                             <div className="article-container">
                                                 <div>

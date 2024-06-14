@@ -46,9 +46,9 @@ const Main = () => {
                     <div className="move-btn">
                         보러가기
                         {ThemeMode == 'dark' ? (
-                            <img className="darkBtn" src="./static/halfArrow_dark.png" alt="" />
+                            <img className="darkBtn" src="./static/halfArrow_dark.png" alt="" onError={(e) => e.target.src = "./static/img_not_found.jpg"}/>
                         ) : (
-                            <img className="lightBtn" src="./static/halfArrow_light.png" alt="" />
+                            <img className="lightBtn" src="./static/halfArrow_light.png" alt="" onError={(e) => e.target.src = "./static/img_not_found.jpg"}/>
                         )}
                     </div>
                 </Link>
