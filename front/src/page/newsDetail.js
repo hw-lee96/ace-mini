@@ -97,16 +97,18 @@ const NewsDetail = () => {
                   className="back-arrow"
                   src="./static/back_arrow_dark.png"
                   alt=""
+                  onError={(e) => e.target.src = "./static/img_not_found.jpg"}
                 />
               ) : (
                 <img
                   className="back-arrow"
                   src="./static/back_arrow.png"
                   alt=""
+                  onError={(e) => e.target.src = "./static/img_not_found.jpg"}
                 />
               )}
             </div>
-            <img className="small-img" src={selectedArticle.img} alt="title" />
+            <img className="small-img" src={selectedArticle.img} alt="title" onError={(e) => e.target.src = "./static/img_not_found.jpg"}/>
             <span className="small-title">{selectedArticle.title}</span>
           </div>
           <div className="up-right">
