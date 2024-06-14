@@ -41,11 +41,10 @@ def news_serializer(news) -> dict:
     
 @router.get("/detail/{id}", response_model=News)
 async def get_news_detail(id : str):
-    
     news = news_collection.find_one({"_id": ObjectId(id)})
     if news is None:
-        raise HTTPException(status_code=404, detail="뉴스 찾아도 안나옴")
-    
+        raise HTTPException(status_code=404, detail="존재하지 않는 뉴스 입니다.")
+    await update_view_count(id, news)
     return news_serializer(news)
 
 
@@ -72,9 +71,13 @@ async def update_like_count(id: str):
     
     article= news_collection.find_one({"_id" :ObjectId(id)})
     if not article :
-         raise HTTPException(status_code=404, detail ="기사 없음")
+         raise HTTPException(status_code=404, detail ="존재하지 않는 뉴스 입니다.")
     new_like_count = article.get('like', 0) + 1
     
     news_collection.update_one({"_id" : ObjectId(id)}, {"$set": {"like": new_like_count}})
     
     return {"id": id, "new_like_count": new_like_count}
+
+async def update_view_count(id: str, article):
+    new_like_count = article.get('views', 0) + 1
+    return news_collection.update_one({"_id" : ObjectId(id)}, {"$set": {"views": new_like_count}})
