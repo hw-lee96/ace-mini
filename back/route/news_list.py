@@ -25,10 +25,9 @@ def get_news_list(result : str):
 
     # news 테이블에서 result 값이 {result = positive , negative, neutral}를 통해 리스트 가져오기
     sort_news_list = list(news_collection.find({'result': result}))  # Cursor 객체를 리스트로 변환
-    print('정렬 전 =', sort_news_list)
 
     random.shuffle(sort_news_list)  # 리스트를 섞기
-    print('정렬 후 =', sort_news_list)
+
 
     # 분류 된 기사 레코드를 저장할 배열 생성
     sort_cls_list = []
