@@ -9,6 +9,8 @@ import NewsList from "./page/newsList";
 import NewsDetail from "./page/newsDetail";
 import NewsMain from "./page/newsMain";
 
+import useStore from './commonStore'
+
 // const Home = () => (
 //     <div>
 //         <Link to="/">
@@ -45,11 +47,13 @@ const App = () => {
 };
 
 const AppWrapper = () => {
+  const { hasFixedBottom } = useStore()
+
   return (
     <Router>
       <ThemeProvider>
         <GlobalStyle />
-        <div className="container">
+        <div className={hasFixedBottom == true ? 'container has-fixed-bottom' : 'container'}>
           <Header />
           <App />
         </div>

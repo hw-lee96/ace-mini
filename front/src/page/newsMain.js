@@ -1,17 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './newsMain.css'
 
 import NewsCarousel from './component/newsCarousel'
 import { useTheme } from '../theme/themeProvider'
 
+import useStore from '../commonStore'
+
 const Main = () => {
     const [ThemeMode, toggleTheme] = useTheme()
+    const { setHasFixedBottom } = useStore()
+
+    useEffect(() => {
+        setHasFixedBottom(true)
+    }, [])
+
 
     return (
         <div className="mainWrap">
             <div className="content">
-                <div className="most-liked-news">
+                <div className="most-liked-news newsWrap">
                     <div className="titleWrap">
                         <div className="title">사람들이 가장 좋아한 글</div>
                     </div>
@@ -20,7 +28,7 @@ const Main = () => {
                     </div>
                 </div>
 
-                <div className="most-viewed-news">
+                <div className="most-viewed-news newsWrap">
                     <div className="titleWrap">
                         <div className="title">사람들이 가장 많이 본 글</div>
                     </div>
@@ -29,7 +37,7 @@ const Main = () => {
                     </div>
                 </div>
             </div>
-            <div className="news-main-footer">
+            <div className="news-main-footer fixed-bottom">
                 <div className="info">
                     <div>더 자세하고 많은 뉴스가</div>
                     <div>궁금하다면?</div>
