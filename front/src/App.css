@@ -18,3 +18,7 @@ body {
     align-items: center;
     margin: 0 16.66vw;
 }
+
+.container.has-fixed-bottom {
+    margin-bottom: 280px;
+}

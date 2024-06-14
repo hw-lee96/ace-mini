@@ -9,6 +9,8 @@ import NewsList from "./page/newsList";
 import NewsDetail from "./page/newsDetail";
 import NewsMain from "./page/newsMain";
 
+import useStore from './commonStore'
+
 // const Home = () => (
 //     <div>
 //         <Link to="/">
@@ -34,8 +36,8 @@ import NewsMain from "./page/newsMain";
 
 const App = () => {
   return useRoutes([
-    { path: "/", element: <NewsList /> },
-    { path: "/main", element: <NewsMain /> },
+    { path: "/", element: <NewsMain /> },
+    { path: "/list", element: <NewsList /> },
     { path: "/:id", element: <NewsDetail /> },
     // { path: '/exer/hw', element: <Todo2 /> },
     // { path: '/exer/jh', element: <Todo3 /> },
@@ -45,11 +47,13 @@ const App = () => {
 };
 
 const AppWrapper = () => {
+  const { hasFixedBottom } = useStore()
+
   return (
     <Router>
       <ThemeProvider>
         <GlobalStyle />
-        <div className="container">
+        <div className={hasFixedBottom == true ? 'container has-fixed-bottom' : 'container'}>
           <Header />
           <App />
         </div>
