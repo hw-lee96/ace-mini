@@ -4,20 +4,23 @@ import NewsCard from "./component/newsCard";
 import { useTheme } from "../theme/themeProvider";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import useStore from '../commonStore'
 
 const NewsDetail = () => {
-  const { id } = useParams();
   const [ThemeMode] = useTheme();
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [sortedRecommendations, setSortedRecommendations] = useState([]);
   const [relatedArticles, setRelatedArticles] = useState([]);
+  const { newsId, setNewsId, setIsOpen } = useStore()
 
   useEffect(() => {
     //특정 아이디로 api 호출
     const get_detail = async () => {
       try {
-        let rs = await axios.get(`api/news/detail/${id}`);
-
+        if (!newsId || newsId == 0) {
+          return 
+        }
+        let rs = await axios.get(`api/news/detail/${newsId}`);
         const data = rs.data;
 
         // 선택 뉴스 출력
@@ -41,7 +44,7 @@ const NewsDetail = () => {
 
         // 현재회사와의 관련기사 설정
         const relatedRs = await axios.get(
-          `api/news/related/${data.company_name}/${id}`
+          `api/news/related/${data.company_name}/${newsId}`
         );
         console.log(relatedRs.data);
         setRelatedArticles(relatedRs.data);
@@ -50,7 +53,7 @@ const NewsDetail = () => {
       }
     };
     get_detail();
-  }, [id]);
+  }, [newsId]);
 
   if (!selectedArticle) return <div> Loading......... </div>;
 
@@ -65,7 +68,7 @@ const NewsDetail = () => {
       <div className="blank compBg"></div>
       <div className="newsDetailWrap compBg">
         <div className="go-to-back">
-          <div className="up-left">
+          <div className="up-left" onClick={() => setIsOpen(false)}>
             <div>
               {ThemeMode === "dark" ? (
                 <img

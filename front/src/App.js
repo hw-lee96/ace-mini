@@ -15,7 +15,6 @@ const App = () => {
   return useRoutes([
     { path: "/", element: <NewsMain /> },
     { path: "/list", element: <NewsList /> },
-    { path: "/:id", element: <NewsDetail /> },
   ]);
 };
 
