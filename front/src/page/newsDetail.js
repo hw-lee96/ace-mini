@@ -58,7 +58,7 @@ const NewsDetail = () => {
   //좋아요 수
   const handleLike = async () => {
     try {
-      const response = await axios.put(`api/news/like/${id}`);
+      const response = await axios.put(`api/news/like/${newsId}`);
       setSelectedArticle((prevArticle) => ({
         ...prevArticle,
         like: response.data.new_like_count,
