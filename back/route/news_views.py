@@ -35,4 +35,4 @@ def get_news_detail(news_id: str):
 
     print('뉴스 ID = ',news_id , '업데이트 후 뷰  =  ' , article.get('views', 0) )
 
-    return 2
+    return update_views
