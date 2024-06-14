@@ -17,6 +17,7 @@ body {
     flex-direction: column;
     align-items: center;
     margin: 0 16.66vw;
+    padding-top: 50px;
 }
 
 .container.has-fixed-bottom {

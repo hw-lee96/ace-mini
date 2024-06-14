@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./newsDetail.css";
 import NewsCard from "./component/newsCard";
 import { useTheme } from "../theme/themeProvider";
@@ -12,6 +12,7 @@ const NewsDetail = ({ newsId, onRelatedArticleClick }) => {
   const [sortedRecommendations, setSortedRecommendations] = useState([]);
   const [relatedArticles, setRelatedArticles] = useState([]);
   const { setNewsId, setIsOpen } = useStore();
+  const detailRef = useRef(null); //디테일부분을 참조하기 위한 useRef
 
   useEffect(() => {
     //특정 아이디로 api 호출
@@ -48,6 +49,11 @@ const NewsDetail = ({ newsId, onRelatedArticleClick }) => {
         );
         console.log(relatedRs.data);
         setRelatedArticles(relatedRs.data);
+
+        // 스크롤을 최상단으로 이동
+        if (detailRef.current) {
+          detailRef.current.scrollTo(0, 0);
+        }
       } catch (e) {
         console.error("에러낫슈", e);
       }
@@ -77,7 +83,7 @@ const NewsDetail = ({ newsId, onRelatedArticleClick }) => {
   };
 
   return (
-    <div className="bodyWrap bgClass">
+    <div className="bodyWrap bgClass" ref={detailRef}>
       <div className="blank compBg"></div>
       <div className="newsDetailWrap compBg">
         <div className="go-to-back">
