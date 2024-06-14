@@ -5,18 +5,14 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import "./newsCarousel.css";
+import axios from "axios";
 
 import NewsCard from "./newsCard";
 
 async function getArticles(type) {
-    const requestOptions = {
-        method: 'GET'
-    };
     try {
-        const response = await fetch(`api/news/ranking/${type}/`, requestOptions);
-
-        const data = await response.json();
-        return data;
+        const response = await axios.get(`api/news/ranking/${type}`);
+        return response.data;
 
     } catch (error) {
         console.error('Error fetching data:', error);
