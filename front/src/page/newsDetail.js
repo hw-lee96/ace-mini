@@ -95,12 +95,14 @@ const NewsDetail = () => {
                 className="back-arrow"
                 src="./static/back_arrow_dark.png"
                 alt=""
+                onError={(e) => (e.target.src = "./static/img_not_found.jpg")}
               />
             ) : (
               <img
                 className="back-arrow"
                 src="./static/back_arrow.png"
                 alt=""
+                onError={(e) => (e.target.src = "./static/img_not_found.jpg")}
               />
             )}
           </div>
@@ -114,12 +116,14 @@ const NewsDetail = () => {
                 className="up__views_img"
                 src="./static/view-dark.png"
                 alt=""
+                onError={(e) => (e.target.src = "./static/img_not_found.jpg")}
               />
             ) : (
               <img
                 className="up__views_img"
                 src="./static/view-light.png"
                 alt=""
+                onError={(e) => (e.target.src = "./static/img_not_found.jpg")}
               />
             )}
             <div className="up-views purCard">{selectedArticle.views}</div>
@@ -130,12 +134,14 @@ const NewsDetail = () => {
                 className="up__like_img"
                 src="./static/heart-dark.png"
                 alt=""
+                onError={(e) => (e.target.src = "./static/img_not_found.jpg")}
               />
             ) : (
               <img
                 className="up__like_img"
                 src="./static/heart-light.png"
                 alt=""
+                onError={(e) => (e.target.src = "./static/img_not_found.jpg")}
               />
             )}
             <div className="up-like purCard">{selectedArticle.like}</div>
@@ -147,6 +153,7 @@ const NewsDetail = () => {
           src={selectedArticle.img}
           alt="hello"
           className="news-detail__image"
+          onError={(e) => (e.target.src = "./static/img_not_found.jpg")}
         />
         <h2 className="news-detail__title">{selectedArticle.title}</h2>
         <p className="news-detail__media">{selectedArticle.media}</p>
