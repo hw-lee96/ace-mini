@@ -1,24 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./newsDetail.css";
 import NewsCard from "./component/newsCard";
 import { useTheme } from "../theme/themeProvider";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import useStore from '../commonStore'
+import useStore from "../commonStore";
 
-const NewsDetail = () => {
+const NewsDetail = ({ newsId, onRelatedArticleClick }) => {
   const [ThemeMode] = useTheme();
   const [selectedArticle, setSelectedArticle] = useState(null);
   const [sortedRecommendations, setSortedRecommendations] = useState([]);
   const [relatedArticles, setRelatedArticles] = useState([]);
-  const { newsId, setNewsId, setIsOpen } = useStore()
+  const { setNewsId, setIsOpen } = useStore();
+  const detailRef = useRef(null); //디테일부분을 참조하기 위한 useRef
 
   useEffect(() => {
     //특정 아이디로 api 호출
     const get_detail = async () => {
       try {
         if (!newsId || newsId == 0) {
-          return 
+          return;
         }
         let rs = await axios.get(`api/news/detail/${newsId}`);
         const data = rs.data;
@@ -48,6 +49,11 @@ const NewsDetail = () => {
         );
         console.log(relatedRs.data);
         setRelatedArticles(relatedRs.data);
+
+        // 스크롤을 최상단으로 이동
+        if (detailRef.current) {
+          detailRef.current.scrollTo(0, 0);
+        }
       } catch (e) {
         console.error("에러낫슈", e);
       }
@@ -77,7 +83,7 @@ const NewsDetail = () => {
   };
 
   return (
-    <div className="bodyWrap bgClass">
+    <div className="bodyWrap bgClass" ref={detailRef}>
       <div className="blank compBg"></div>
       <div className="newsDetailWrap compBg">
         <div className="go-to-back">
@@ -142,8 +148,8 @@ const NewsDetail = () => {
         />
         <h2 className="news-detail__title">{selectedArticle.title}</h2>
         <p className="news-detail__media">{selectedArticle.media}</p>
-
-        <p className="news-detail__content"> {selectedArticle.summary} </p>
+        <p>📝[한 줄 요약] </p>
+        <p className="news-detail__content">{selectedArticle.summary} </p>
         <p className="news-detail__date">{selectedArticle.date}</p>
 
         {ThemeMode === "dark" ? (
@@ -156,7 +162,7 @@ const NewsDetail = () => {
           </a>
         )}
         <div className="news-detail__recommendations">
-          <h3>이 뉴스를 추천할게요</h3>
+          <h3>이 뉴스의 평가</h3>
           <ul>
             {sortedRecommendations.map((rec, index) => (
               <li key={index} className="recommendation-item">
@@ -179,7 +185,7 @@ const NewsDetail = () => {
         </div>
         <div>
           <h2 className="related-articles">
-            {selectedArticle.company_name} 과 관련된 최근 기사
+            🏢 [{selectedArticle.company_name}] 과 관련된 최근 기사
           </h2>
           <div className="related-articles__list">
             {relatedArticles.map((article, index) => (
@@ -191,6 +197,7 @@ const NewsDetail = () => {
                 date={article.date}
                 views={article.views}
                 like={article.like}
+                onClick={() => onRelatedArticleClick(article._id)}
               />
             ))}
           </div>
