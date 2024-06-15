@@ -15,7 +15,11 @@ const NewsCard = ({ id, img, title, date, views, like, summary, onClick }) => {
   const [ThemeMode] = useTheme()
 
   return (
-    <div className="news-card recBar" onClick={() => onClick(id)}>
+    <div
+      className="news-card recBar"
+      style={{ height: '487.8px' }}
+      onClick={() => onClick(id)}
+    >
       <img
         src={img}
         alt={title}
