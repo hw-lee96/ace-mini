@@ -1,6 +1,9 @@
+:root {
+  --swiper-navigation-size: 0px;
+}
 .swiper-container {
   width: 100%;
-  padding: 20px;
+
   overflow: visible;
   position: relative; /* position relative 추가 */
 }
@@ -21,31 +24,47 @@
   opacity: 0.5; /* 투명도 설정 */
   z-index: 1; /* 활성화된 슬라이드 위에 배치 */
 }
+.swiper-wrapper {
+}
 
 .swiper-wrapper-container {
-  position: relative;
+  /* position: relative; */
 }
 
 .swiper-button-prev {
-  position: absolute !important; /* !important 추가 */
-  top: -40px !important; /* !important 추가 */
-  transform: translateX(120px);
+  /* position: absolute !important; /* !important 추가 */
+  /* top: -40px !important; /* !important 추가 */
+  /* transform: translateX(120px); */
+  /* display: block;
+  left: 0 !important;
+  top: 0 !important;
+  z-index: 10; */
+
+  position: static;
+  display: block;
+  width: auto;
+  height: auto;
+}
+
+.swiper-button-next {
+  position: static;
+  display: block;
+  width: auto;
+  height: auto;
+
   z-index: 10;
 }
 
 .swiper-button-next {
-  position: absolute !important; /* !important 추가 */
-  top: -40px !important; /* !important 추가 */
-
-  z-index: 10;
-}
-
-.swiper-button-next {
-  right: 10px !important; /* !important 추가 */
+  /* right: 10px !important;  */
+  /* top: -40px; */
 }
 
 .swiper-button-prev {
-  left: 880px;
+  /* left: 880px; */
+  /* top: -40px; */
+  /* left: 500px; */
+  /* transform: translateX(700px); */
 }
 
 .custom-nav-button img {

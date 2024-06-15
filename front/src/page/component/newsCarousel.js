@@ -50,13 +50,22 @@ function NewsCarousel({ type }) {
 
   return (
     <div className="swiper-container">
-      <div className="swiper-wrapper">
-        <div className="swiper-button-prev custom-nav-button" ref={prevRef}>
+      <div
+        style={{ display: 'flex', justifyContent: 'end', marginBottom: '10px' }}
+      >
+        <div
+          className="swiper-button-prev custom-nav-button "
+          style={{ marginRight: '10px' }}
+          ref={prevRef}
+        >
           <img src="/static/prevBtn.png" alt="Previous" />
         </div>
         <div className="swiper-button-next custom-nav-button" ref={nextRef}>
           <img src="/static/nextBtn.png" alt="Next" />
         </div>
+      </div>
+
+      <div className="swiper-wrapper" style={{ flexDirection: 'column' }}>
         <Swiper
           modules={[Navigation, Autoplay]}
           loop={true}
