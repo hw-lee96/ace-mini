@@ -87,7 +87,7 @@ const NewsDetail = () => {
 
   return (
     <div className="bodyWrap bgClass" ref={detailRef}>
-      <div className="go-to-back compBg">
+      <div className="go-to-back detailBg">
         <div className="up-left" onClick={() => setIsOpen(false)}>
           <div>
             {ThemeMode === "dark" ? (
@@ -148,7 +148,7 @@ const NewsDetail = () => {
           </div>
         </div>
       </div>
-      <div className="newsDetailWrap compBg">
+      <div className="newsDetailWrap detailBg">
         <img
           src={selectedArticle.img}
           alt="hello"
@@ -156,9 +156,16 @@ const NewsDetail = () => {
           onError={(e) => (e.target.src = "./static/img_not_found.jpg")}
         />
         <h2 className="news-detail__title">{selectedArticle.title}</h2>
+        <p className="news-detail__company-name">
+          🏢 관련성이 높은 기업 : {selectedArticle.company_name}
+        </p>
+
+        <p className="news-detail__content-title"> </p>
+        <p className="news-detail__content">
+          📝 [ 한 줄 요약 ] <br /> {selectedArticle.summary}
+        </p>
         <p className="news-detail__media">{selectedArticle.media}</p>
-        <p className="news-detail__content-title">📝[한 줄 요약] </p>
-        <p className="news-detail__content">{selectedArticle.summary} </p>
+
         <p className="news-detail__date">{selectedArticle.date}</p>
 
         {ThemeMode === "dark" ? (
@@ -192,29 +199,29 @@ const NewsDetail = () => {
             ))}
           </ul>
         </div>
-        <div>
-          <h2 className="related-articles">
-            🏢 [{selectedArticle.company_name}] 와(과) 관련된 최근 기사
-          </h2>
-          <div className="related-articles__list">
-            {relatedArticles.map((article, index) => (
-              <NewsCard
-                key={index}
-                img={article.img}
-                title={article.title}
-                summary={article.summary}
-                date={article.date}
-                views={article.views}
-                like={article.like}
-                onClick={() => {
-                  setNewsId(article._id);
-                  if (detailRef.current) {
-                    detailRef.current.scrollIntoView({ behavior: "smooth" });
-                  }
-                }}
-              />
-            ))}
-          </div>
+      </div>
+      <div className="related-container reContainer">
+        <h2 className="related-articles">
+          🏢 [{selectedArticle.company_name}] 와(과) 관련된 최근 기사
+        </h2>
+        <div className="related-articles__list">
+          {relatedArticles.map((article, index) => (
+            <NewsCard
+              key={index}
+              img={article.img}
+              title={article.title}
+              summary={article.summary}
+              date={article.date}
+              views={article.views}
+              like={article.like}
+              onClick={() => {
+                setNewsId(article._id);
+                if (detailRef.current) {
+                  detailRef.current.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
+            />
+          ))}
         </div>
       </div>
     </div>

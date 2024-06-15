@@ -15,9 +15,14 @@ const NewsCard = ({ id, img, title, date, views, like, summary, onClick }) => {
   const [ThemeMode] = useTheme();
 
   return (
-    <div className="news-card recBar" onClick={() => onClick(id)}>
-      <img src={img} alt={title} className="news-card__image" onError={(e) => e.target.src = "./static/img_not_found.jpg"}/>
-      <div className="news-card__content">
+    <div className="news-card newsCard" onClick={() => onClick(id)}>
+      <img
+        src={img}
+        alt={title}
+        className="news-card__image"
+        onError={(e) => (e.target.src = "./static/img_not_found.jpg")}
+      />
+      <div className="news-card__content newsCard">
         <h4 className="news-card__title">{title}</h4>
         <p className="news-card__snippet">{truncateText(summary, 50)}</p>
         <div className="date_like">
@@ -27,14 +32,14 @@ const NewsCard = ({ id, img, title, date, views, like, summary, onClick }) => {
               className="news-card__views_img"
               src="./static/view-dark.png"
               alt=""
-              onError={(e) => e.target.src = "./static/img_not_found.jpg"}
+              onError={(e) => (e.target.src = "./static/img_not_found.jpg")}
             />
           ) : (
             <img
               className="news-card__views_img"
               src="./static/view-light.png"
               alt=""
-              onError={(e) => e.target.src = "./static/img_not_found.jpg"}
+              onError={(e) => (e.target.src = "./static/img_not_found.jpg")}
             />
           )}
           <p className="news-card__views purCard">{views}</p>
@@ -43,14 +48,14 @@ const NewsCard = ({ id, img, title, date, views, like, summary, onClick }) => {
               className="news-card__like_img"
               src="./static/heart-dark.png"
               alt=""
-              onError={(e) => e.target.src = "./static/img_not_found.jpg"}
+              onError={(e) => (e.target.src = "./static/img_not_found.jpg")}
             />
           ) : (
             <img
               className="news-card__like_img"
               src="./static/heart-light.png"
               alt=""
-              onError={(e) => e.target.src = "./static/img_not_found.jpg"}
+              onError={(e) => (e.target.src = "./static/img_not_found.jpg")}
             />
           )}
           <p className="news-card__like purCard">{like}</p>

@@ -16,5 +16,10 @@ export const GlobalStyle = createGlobalStyle`
 	.purCard {color : ${({ theme }) => theme.purCard}}
 	.recPercentage {background-color : ${({ theme }) => theme.recPercentage}}
 	.recText {color :  ${({ theme }) => theme.recText}}
+	.reContainer {background-color :  ${({ theme }) => theme.reContainer}}
+	.newsCard {background-color :  ${({ theme }) => theme.newsCard}}
+	.detailBg {background-color :  ${({ theme }) => theme.detailBg}}
+
+
 
 `;
