@@ -14,7 +14,7 @@
 /* 디테일 상단 바 */
 
 .go-to-back {
-  width: 30%;
+  width: 29%;
   position: fixed;
   height: 40px;
   align-items: center;
@@ -22,7 +22,8 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 10px 20px;
-  border-radius: 8px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
 }
 .up-left {
   align-items: center;
