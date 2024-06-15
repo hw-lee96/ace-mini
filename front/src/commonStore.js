@@ -7,8 +7,9 @@ const useStore = create((set) => ({
     setIsDark: (flag) => set({ isDark: flag }),
     newsId: 0,
     setNewsId: (id) => set({ newsId: id }),
-    isOpen: false,
-    setIsOpen: (flag) => set({ isOpen: flag }),
+    isOpen: 0,
+    setIsOpen: (flag) => set({ isOpen: flag }), // 0:close, 1:open, 2: Force open only once & change 1 
+    closeSlide: () => set({ newsId: 0, isOpen: 0 }),
 }))
 
-export default useStore 
+export default useStore

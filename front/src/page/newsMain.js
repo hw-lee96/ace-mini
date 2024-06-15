@@ -8,10 +8,11 @@ import { useTheme } from '../theme/themeProvider'
 import useStore from '../commonStore'
 
 const Main = () => {
-  const [ThemeMode, toggleTheme] = useTheme()
-  const { setHasFixedBottom } = useStore()
+  const [ThemeMode] = useTheme()
+  const { setHasFixedBottom, closeSlide } = useStore()
 
   useEffect(() => {
+    closeSlide()
     setHasFixedBottom(true)
   }, [])
 
@@ -44,7 +45,7 @@ const Main = () => {
         <Link to="/list" className="ftColor">
           <div className="move-btn">
             보러가기
-            {ThemeMode == 'dark' ? (
+            {ThemeMode === 'dark' ? (
               <img
                 className="darkBtn"
                 src="./static/halfArrow_dark.png"
