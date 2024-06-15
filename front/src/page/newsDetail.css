@@ -40,7 +40,7 @@
 
 .small-title {
   margin-left: 10px;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: bold;
   white-space: nowrap; /* 텍스트를 한 줄로 */
   overflow: hidden; /* 텍스트가 넘칠 경우 숨김 */
@@ -51,6 +51,7 @@
   align-items: center;
   display: flex;
   flex-direction: row;
+  justify-content: flex-end;
 }
 .up-views-count {
   align-items: center;
@@ -63,6 +64,7 @@
 }
 .up-views {
   margin-left: 4px;
+  font-size: 12px;
 }
 
 .handle-like {
@@ -78,6 +80,7 @@
 }
 .up-like {
   margin-left: 4px;
+  font-size: 12px;
 }
 
 /* detail 본문 */
@@ -98,20 +101,25 @@
   margin-top: 20px;
   line-height: 28px;
 }
-.news-detail__media {
-  margin-top: 13px;
-  margin-bottom: 30px;
-}
 
-.news-detail__date {
-  color: #888;
+.news-detail__company-name {
   margin-top: 30px;
-  margin-bottom: 20px;
+  margin-right: 20px;
 }
 
 .news-detail__content {
-  margin-top: 10px;
+  margin-top: 30px;
   line-height: 1.6;
+}
+
+.news-detail__media {
+  margin-top: 30px;
+}
+
+.news-detail__date {
+  margin-top: 20px;
+
+  color: #888;
 }
 
 .news-detail__button {
@@ -166,6 +174,7 @@
 
 .news-detail__recommendations {
   margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 .news-detail__recommendations ul {
@@ -203,8 +212,11 @@
   font-weight: bold;
 }
 
+.related-container {
+  padding: 20px;
+}
+
 .related-articles {
-  margin-top: 60px;
   margin-bottom: 20px;
   font-weight: 700;
   /* color: #2c2d2e; */
