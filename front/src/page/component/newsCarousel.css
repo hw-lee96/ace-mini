@@ -29,14 +29,14 @@
 .swiper-button-prev {
   position: absolute !important; /* !important 추가 */
   top: -40px !important; /* !important 추가 */
-  transform: translateX(60px);
+  transform: translateX(120px);
   z-index: 10;
 }
 
 .swiper-button-next {
   position: absolute !important; /* !important 추가 */
   top: -40px !important; /* !important 추가 */
-  transform: translateX(60px);
+
   z-index: 10;
 }
 
