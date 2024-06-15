@@ -25,17 +25,17 @@ const NewsCard = ({ img, title, date, views, like, summary }) => {
       />
       <div className="news-card__content">
         <h4
-          className="news-card-small__title"
+          className="news-card__title"
           style={{
-            fontSize: "22px",
-            lineHeight: "28.6px",
+            fontSize: "16px",
+            lineHeight: "22px",
             fontWeight: "700",
           }}
         >
           {title}
         </h4>
 
-        <p className="news-card__snippet"> {truncateText(summary, 150)}</p>
+        <p className="news-card__snippet"> {truncateText(summary, 50)}</p>
       </div>
       <div className="date_like" style={{ padding: "10px" }}>
         <p className="news-card__date">{date}</p>

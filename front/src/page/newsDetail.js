@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./newsDetail.css";
-import NewsCard from "./component/newsCard";
+import NewsCardS from "./component/newsCard_small";
 import { useTheme } from "../theme/themeProvider";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -41,7 +41,7 @@ const NewsDetail = () => {
         const formattedClsResults = Object.keys(clsResults)
           .map((key) => ({
             label: labelMap[key], // label값을 반환
-            percentage: (clsResults[key] * 100).toFixed(2), //퍼센트 형식으로 반환
+            percentage: (clsResults[key] * 100).toFixed(1), //퍼센트 형식으로 반환
           }))
           .sort((a, b) => b.percentage - a.percentage); // 내림차순정렬
         setSortedRecommendations(formattedClsResults);
@@ -206,7 +206,7 @@ const NewsDetail = () => {
         </h2>
         <div className="related-articles__list">
           {relatedArticles.map((article, index) => (
-            <NewsCard
+            <NewsCardS
               key={index}
               img={article.img}
               title={article.title}

@@ -24,6 +24,7 @@
   padding: 10px 20px;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
+  z-index: 1000;
 }
 .up-left {
   align-items: center;
@@ -228,4 +229,5 @@
   flex-wrap: nowrap; /* 줄바꿈을 허용하여 한 줄에 두 개의 카드가 배치되도록 설정 */
   justify-content: space-between; /* 카드 사이의 공간을 균등하게 배분 */
   gap: 20px;
+  width: 100%;
 }
