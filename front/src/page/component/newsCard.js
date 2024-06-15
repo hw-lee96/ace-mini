@@ -4,7 +4,7 @@ import "./newsCard.css";
 import { useTheme } from "../../theme/themeProvider";
 import useStore from "../../commonStore";
 
-const NewsCard = ({ id, img, title, date, views, like, summary, onClick }) => {
+const NewsCard = ({ img, title, date, views, like, summary }) => {
   const truncateText = (text, limit) => {
     if (text && text.length > limit) {
       return text.substring(0, limit) + "...";
@@ -15,11 +15,7 @@ const NewsCard = ({ id, img, title, date, views, like, summary, onClick }) => {
   const [ThemeMode] = useTheme();
 
   return (
-    <div
-      className="news-card newsCard"
-      style={{ height: "100%" }}
-      onClick={() => onClick(id)}
-    >
+    <div className="news-card recBar" style={{ height: "100%" }}>
       <img
         src={img}
         alt={title}

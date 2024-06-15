@@ -87,8 +87,8 @@ const NewsDetail = () => {
 
   return (
     <div className="bodyWrap bgClass" ref={detailRef}>
-      <div className="go-to-back detailBg">
-        <div className="up-left" onClick={() => setIsOpen(false)}>
+      <div className="go-to-back compBg">
+        <div className="up-left" onClick={() => setIsOpen(0)}>
           <div>
             {ThemeMode === "dark" ? (
               <img
