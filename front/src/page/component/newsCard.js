@@ -17,7 +17,7 @@ const NewsCard = ({ id, img, title, date, views, like, summary, onClick }) => {
   return (
     <div
       className="news-card recBar"
-      style={{ height: '487.8px' }}
+      style={{ height: '100%' }}
       onClick={() => onClick(id)}
     >
       <img
@@ -31,48 +31,50 @@ const NewsCard = ({ id, img, title, date, views, like, summary, onClick }) => {
         <h4
           className="news-card__title"
           style={{
-            fontSize: '23.4px',
+            fontSize: '22px',
             lineHeight: '28.6px',
+            fontWeight: '700',
           }}
         >
           {title}
         </h4>
-        <p className="news-card__snippet"> {truncateText(summary, 100)}</p>
-        <div className="date_like">
-          <p className="news-card__date">{date}</p>
-          {ThemeMode === 'dark' ? (
-            <img
-              className="news-card__views_img"
-              src="./static/view-dark.png"
-              alt=""
-              onError={(e) => (e.target.src = './static/img_not_found.jpg')}
-            />
-          ) : (
-            <img
-              className="news-card__views_img"
-              src="./static/view-light.png"
-              alt=""
-              onError={(e) => (e.target.src = './static/img_not_found.jpg')}
-            />
-          )}
-          <p className="news-card__views purCard">{views}</p>
-          {ThemeMode === 'dark' ? (
-            <img
-              className="news-card__like_img"
-              src="./static/heart-dark.png"
-              alt=""
-              onError={(e) => (e.target.src = './static/img_not_found.jpg')}
-            />
-          ) : (
-            <img
-              className="news-card__like_img"
-              src="./static/heart-light.png"
-              alt=""
-              onError={(e) => (e.target.src = './static/img_not_found.jpg')}
-            />
-          )}
-          <p className="news-card__like purCard">{like}</p>
-        </div>
+
+        <p className="news-card__snippet"> {truncateText(summary, 150)}</p>
+      </div>
+      <div className="date_like" style={{ padding: '10px' }}>
+        <p className="news-card__date">{date}</p>
+        {ThemeMode === 'dark' ? (
+          <img
+            className="news-card__views_img"
+            src="./static/view-dark.png"
+            alt=""
+            onError={(e) => (e.target.src = './static/img_not_found.jpg')}
+          />
+        ) : (
+          <img
+            className="news-card__views_img"
+            src="./static/view-light.png"
+            alt=""
+            onError={(e) => (e.target.src = './static/img_not_found.jpg')}
+          />
+        )}
+        <p className="news-card__views purCard">{views}</p>
+        {ThemeMode === 'dark' ? (
+          <img
+            className="news-card__like_img"
+            src="./static/heart-dark.png"
+            alt=""
+            onError={(e) => (e.target.src = './static/img_not_found.jpg')}
+          />
+        ) : (
+          <img
+            className="news-card__like_img"
+            src="./static/heart-light.png"
+            alt=""
+            onError={(e) => (e.target.src = './static/img_not_found.jpg')}
+          />
+        )}
+        <p className="news-card__like purCard">{like}</p>
       </div>
     </div>
   )

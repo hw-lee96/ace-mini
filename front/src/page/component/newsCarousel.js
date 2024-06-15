@@ -85,7 +85,7 @@ function NewsCarousel({ type }) {
           autoplay={{
             delay: 2500,
           }}
-          style={{ width: '100%', height: '300px', borderRadius: '15px' }}
+          style={{ width: '100%', height: '340px', borderRadius: '15px' }}
         >
           {relatedArticles.map((article) => (
             <SwiperSlide key={article._id}>
