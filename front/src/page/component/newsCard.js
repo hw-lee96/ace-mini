@@ -33,7 +33,6 @@ const NewsCard = ({ id, img, title, date, views, like, summary, onClick }) => {
           style={{
             fontSize: '23.4px',
             lineHeight: '28.6px',
-            color: 'rgba(44,45,46,1)',
           }}
         >
           {title}
