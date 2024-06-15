@@ -28,15 +28,15 @@ async def add_company() :
             company_code =str.strip(separate_line[1])
             
             company = {
-                'comany_name' : company_name,
-                'compan_code' : company_code
+                'company_name' : company_name,
+                'company_name' : company_name
             }
             company_db.insert_one(company)
             print(i)
             i +=1
 
 
-    return 2
+    return i
 
 @router.get("/save/articls")
 async def add() : 
@@ -71,4 +71,4 @@ async def add() :
      
   
 
-    return 2
+    return i
