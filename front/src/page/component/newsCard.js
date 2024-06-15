@@ -16,7 +16,7 @@ const NewsCard = ({ id, img, title, date, views, like, summary, onClick }) => {
 
   return (
     <div
-      className="news-card recBar"
+      className="news-card newsCard"
       style={{ height: "100%" }}
       onClick={() => onClick(id)}
     >
@@ -27,7 +27,7 @@ const NewsCard = ({ id, img, title, date, views, like, summary, onClick }) => {
         style={{ objectFit: "fill" }}
         onError={(e) => (e.target.src = "./static/img_not_found.jpg")}
       />
-      <div className="news-card__content newsCard">
+      <div className="news-card__content">
         <h4
           className="news-card__title"
           style={{
