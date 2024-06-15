@@ -10,15 +10,16 @@ const NewsList = () => {
     const [newsList, setNewsList] = useState([])
     const getAllNewsList = async () => {
         try {
-            if (isOpen === 2) {
-                setIsOpen(1)
-            } else {
+            if (isOpen !== 2) {
                 closeSlide()
             }
             setType('')
             let page = 1
             const response = await axios.get(`api/news/list/${page}`)
             setNewsList(response.data || [])
+            if (isOpen === 2) {
+                setIsOpen(1)
+            }
         } catch (error) {
             console.error('Error fetching news list:', error)
         }
