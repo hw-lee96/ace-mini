@@ -7,6 +7,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   overflow-x: hidden;
   gap: 1;
+  cursor: pointer;
 }
 
 .news-card__image {
@@ -27,7 +28,11 @@
   margin: 10px 0 5px;
   line-height: 18px;
   font-weight: 700;
-  /* color: #2c2d2e; */
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .date_like {

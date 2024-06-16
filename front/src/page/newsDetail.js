@@ -106,7 +106,12 @@ const NewsDetail = () => {
               />
             )}
           </div>
-          <img className="small-img" src={selectedArticle.img} alt="title" />
+          <img
+            className="small-img"
+            src={selectedArticle.img}
+            alt="title"
+            onError={(e) => (e.target.src = "./static/img_not_found.jpg")}
+          />
           <span className="small-title">{selectedArticle.title}</span>
         </div>
         <div className="up-right">
@@ -215,9 +220,7 @@ const NewsDetail = () => {
               views={article.views}
               like={article.like}
               onClick={() => {
-                console.log("Clicked article:", article._id); // 디버그 로그 추가
                 setNewsId(article._id);
-                setIsOpen(1); // isOpen 상태 변경
                 if (detailRef.current) {
                   detailRef.current.scrollIntoView({ behavior: "smooth" });
                 }
