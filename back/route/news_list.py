@@ -49,7 +49,7 @@ def get_news_list(result : str):
 def news_list_serializer(news) -> dict:
     return {
         "id" : str(news["_id"]),
-        "company_name" : news['company_name'],
+        "company_name" : news['company_name'] if news.get('company_name') else '',
         "title": news["title"],
         "date" : news["date"],
         "summary": news["summary"],
