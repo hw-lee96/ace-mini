@@ -16,7 +16,7 @@ const NewsCard = ({ img, title, date, views, like, summary, onClick }) => {
 
   return (
     <div
-      className="news-card newsCard"
+      className="news-card newsCard small"
       style={{ height: "100%" }}
       onClick={onClick}
     >
