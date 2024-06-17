@@ -20,18 +20,12 @@ const Main = () => {
     <div className="mainWrap">
       <div className="content">
         <div className="most-liked-news newsWrap">
-          <div className="titleWrap">
-            <div className="title">사람들이 가장 좋아한 뉴스</div>
-          </div>
           <div className="news-carousel">
             <NewsCarousel type="like" />
           </div>
         </div>
 
         <div className="most-viewed-news newsWrap">
-          <div className="titleWrap">
-            <div className="title">사람들이 가장 많이 본 뉴스</div>
-          </div>
           <div className="news-carousel">
             <NewsCarousel type="view" />
           </div>

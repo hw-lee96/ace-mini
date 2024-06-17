@@ -28,7 +28,7 @@
   height: 140px;
   border-radius: 8px;
 }
-.title {
+.news-list-container .title {
   font-weight: 700;
   margin-bottom: 9px;
   font-size: 18px;

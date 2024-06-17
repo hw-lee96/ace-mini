@@ -23,3 +23,7 @@ body {
 .container.has-fixed-bottom {
     margin-bottom: 280px;
 }
+
+a {
+  text-decoration-line: none;
+}

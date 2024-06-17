@@ -23,7 +23,7 @@ async function getArticles(type) {
 }
 
 function NewsCarousel({ type }) {
-    const prevRef = useRef(null)
+  const prevRef = useRef(null)
     const nextRef = useRef(null)
     const { setNewsId, setIsOpen } = useStore()
 
@@ -53,12 +53,21 @@ function NewsCarousel({ type }) {
 
     return (
         <div className="swiper-container">
-            <div style={{ display: 'flex', justifyContent: 'end', marginBottom: '10px' }}>
-                <div className="swiper-button-prev custom-nav-button " style={{ marginRight: '10px' }} ref={prevRef}>
-                    <img src="/static/prevBtn.png" alt="Previous" />
+            <div className="swiper-top-wrap">
+                <div className="titleWrap">
+                    <div className="title">{type === 'like' ? '사람들이 가장 좋아한 뉴스' : '사람들이 가장 많이 본 뉴스'}</div>
                 </div>
-                <div className="swiper-button-next custom-nav-button" ref={nextRef}>
-                    <img src="/static/nextBtn.png" alt="Next" />
+                <div className="swiper-button-wrap">
+                    <div
+                        className="swiper-button-prev custom-nav-button "
+                        style={{ marginRight: '10px' }}
+                        ref={prevRef}
+                    >
+                        <img src="/static/prevBtn.png" alt="Previous" />
+                    </div>
+                    <div className="swiper-button-next custom-nav-button" ref={nextRef}>
+                        <img src="/static/nextBtn.png" alt="Next" />
+                    </div>
                 </div>
             </div>
 
@@ -66,7 +75,7 @@ function NewsCarousel({ type }) {
                 <Swiper
                     modules={[Navigation, Autoplay]}
                     loop={true}
-                    slidesPerView={1.9}
+                    slidesPerView={3}
                     spaceBetween={20}
                     navigation={{
                         prevEl: prevRef.current,
@@ -80,10 +89,8 @@ function NewsCarousel({ type }) {
                     }}
                     centeredSlides={true}
                     autoplay={{
-                        delay: 2500,
-                    }}
-                    style={{ width: '100%', height: '340px', borderRadius: '15px' }}
-                >
+                        delay: 2500000,
+                    }}>
                     {relatedArticles.map((article) => (
                         <SwiperSlide key={article._id}>
                             <Link
@@ -99,6 +106,8 @@ function NewsCarousel({ type }) {
                                     title={article.title}
                                     summary={article.summary}
                                     date={article.date}
+                                    views={article.views}
+                                    like={article.like}
                                 />
                             </Link>
                         </SwiperSlide>

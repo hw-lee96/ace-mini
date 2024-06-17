@@ -3,11 +3,14 @@
 }
 .swiper-container {
   width: 100%;
-
+  height: 100%;
   overflow: visible;
   position: relative; /* position relative 추가 */
 }
-
+.swiper.swiper-initialized {
+  width: 100%;
+  height: 100%;
+}
 .swiper-slide {
   background-color: #fff; /* 카드 배경색 설정 */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
@@ -15,16 +18,19 @@
 }
 
 .swiper-slide-active {
-  transform: scale(2); /* 활성화된 슬라이드는 조금 더 크게 표시 */
+  width: 23.5vw !important;
+  height: 22vw;
 }
 
 .swiper-slide-prev,
 .swiper-slide-next {
-  transform: scale(0.1); /* 양 옆의 슬라이드는 작게 표시 */
+  width: 19vw !important;
+  height: 17.5vw;
   opacity: 0.5; /* 투명도 설정 */
   z-index: 1; /* 활성화된 슬라이드 위에 배치 */
 }
 .swiper-wrapper {
+  height: 77%;
 }
 
 .swiper-wrapper-container {
@@ -86,4 +92,19 @@
 
 .card-link:hover {
   text-decoration: none; /* 링크를 호버할 때 밑줄 제거 */
+}
+
+.swiper-top-wrap {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 0;
+}
+
+.swiper-top-wrap .title {
+  display: flex;
+  align-items: center;
+}
+
+.swiper-button-wrap {
+  display: flex;
 }

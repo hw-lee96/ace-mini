@@ -7,7 +7,7 @@
 .mainWrap .title {
     font-size: 1.4rem;
     font-weight: 700;
-    padding: 20px;
+    /* padding: 20px; */
 }
 
 .titleWrap {
@@ -18,6 +18,7 @@
 .news-carousel {
     margin-left: 20px;
     margin-right: 20px;
+    height: 100%;
 }
 
 .news-main-footer {
@@ -28,9 +29,9 @@
     border-top: 2px solid #585A5C;
 }
 .news-main-footer .info {
-    font-size: 36px;
+    font-size: 26px;
     font-weight: 700;
-    line-height: 48px;
+    line-height: 38px;
 }
 .news-main-footer a {
     text-decoration: none;
@@ -51,7 +52,8 @@
     margin-left: 8px;
 }
 .newsWrap {
-    margin-bottom: 72px;
+    height: 60vh;
+    /* margin-bottom: 72px; */
 }
 .fixed-bottom {
     position: fixed;
