@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import "./newsDetail.css";
 import NewsCardS from "./component/newsCard_small";
 import { useTheme } from "../theme/themeProvider";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 import useStore from "../commonStore";
 
