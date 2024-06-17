@@ -75,7 +75,7 @@ function NewsCarousel({ type }) {
                 <Swiper
                     modules={[Navigation, Autoplay]}
                     loop={true}
-                    slidesPerView={3}
+                    slidesPerView={2.97}
                     spaceBetween={20}
                     navigation={{
                         prevEl: prevRef.current,
