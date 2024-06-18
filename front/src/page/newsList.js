@@ -43,30 +43,30 @@ const NewsList = () => {
         setIsOpen(1)
     }
 
-    const [isLongPress, setIsLongPress] = useState(false);
-    const timerRef = useRef(null);
+    const [isLongPress, setIsLongPress] = useState(false)
+    const timerRef = useRef(null)
 
     const handleMouseDown = (newsId) => {
         timerRef.current = setTimeout(async () => {
-            setIsLongPress(true);
-            setNewsList(newsList.filter(e => e.id != newsId))
+            setIsLongPress(true)
+            setNewsList(newsList.filter((e) => e.id != newsId))
             await axios.put(`api/news/delete/${newsId}`)
-            alert("Delete Success");
-        }, 1500);
-    };
+            alert('Delete Success')
+        }, 1500)
+    }
 
     const handleMouseUp = () => {
         // 마우스를 떼면 타이머 취소
-        clearTimeout(timerRef.current);
+        clearTimeout(timerRef.current)
         if (isLongPress) {
-            setIsLongPress(false);
+            setIsLongPress(false)
         }
-    };
+    }
 
     const handleMouseLeave = () => {
         // 마우스를 버튼 밖으로 이동하면 타이머 취소
-        clearTimeout(timerRef.current);
-    };
+        clearTimeout(timerRef.current)
+    }
 
     // 시작 시 실행
     useEffect(() => {
@@ -93,46 +93,57 @@ const NewsList = () => {
                 </div>
                 <div className={`list-cover ${isOpen === 1 ? 'open' : ''}`}>
                     <div className={`news-list-wrap ${isOpen === 1 ? 'open' : ''}`}>
-                        {newsList.map((news, i) => {
-                            return (
-                                <div key={i}>
-                                    <div className="itemWrap compBg ftColor" onClick={() => handleItemClick(news.id)}>
-                                        <div className="item compBg">
-                                            <div className="img-box">
-                                                <img
-                                                    src={news.img}
-                                                    alt=""
-                                                    onError={(e) => (e.target.src = './static/img_not_found.jpg')}
-                                                    onMouseDown={() => handleMouseDown(news.id)}
-                                                    onMouseUp={handleMouseUp}
-                                                    onMouseLeave={handleMouseLeave}
-                                                />
-                                            </div>
-                                            <div className="article-container">
-                                                <div className="company-name-font">
-                                                    🏢 관련성이 높은 기업 : {news.company_name}
+                        {Array.isArray(newsList) && newsList.length > 0 ? (
+                            newsList.map((news, i) => {
+                                return (
+                                    <div key={i}>
+                                        <div
+                                            className="itemWrap compBg ftColor"
+                                            onClick={() => handleItemClick(news.id)}
+                                        >
+                                            <div className="item compBg">
+                                                <div className="img-box">
+                                                    <img
+                                                        src={news.img}
+                                                        alt=""
+                                                        onError={(e) => (e.target.src = './static/img_not_found.jpg')}
+                                                        onMouseDown={() => handleMouseDown(news.id)}
+                                                        onMouseUp={handleMouseUp}
+                                                        onMouseLeave={handleMouseLeave}
+                                                    />
                                                 </div>
-                                                <div>
-                                                    <div
-                                                        className={`title ${
-                                                            isOpen === 1 ? 'content-line-clamp-1' : ''
-                                                        }`}
-                                                    >
-                                                        {news.title}
+                                                <div className="article-container">
+                                                    <div className="company-name-font">
+                                                        🏢 관련성이 높은 기업 : {news.company_name}
                                                     </div>
-                                                    <div className="content content-line-clamp-2">
-                                                        <span className="gray-color content-font">
-                                                            📝 [한 줄 요약] {news.summary}
-                                                        </span>
+                                                    <div>
+                                                        <div
+                                                            className={`title ${
+                                                                isOpen === 1 ? 'content-line-clamp-1' : ''
+                                                            }`}
+                                                        >
+                                                            {news.title}
+                                                        </div>
+                                                        <div className="content content-line-clamp-2">
+                                                            <span className="gray-color content-font">
+                                                                📝 [한 줄 요약] {news.summary}
+                                                            </span>
+                                                        </div>
                                                     </div>
+                                                    <div className="date-font">{news.date}</div>
                                                 </div>
-                                                <div className="date-font">{news.date}</div>
                                             </div>
                                         </div>
                                     </div>
+                                )
+                            })
+                        ) : (
+                            <div>
+                                <div className="itemWrap bgColor ftColor list-null" >
+                                    현재 {type == 'positive' ? '긍정적인 ' : type == 'neutral' ? '중립적인 ' : type == 'negative' ? '부정적인 ' : '' }뉴스기사가 없어요!
                                 </div>
-                            )
-                        })}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
