@@ -170,3 +170,9 @@
   font-weight: 600;
   padding-top: 60px;
 }
+
+.news-count {
+  margin: 0 0 15px 10px;
+  font-size: 15px;
+  font-weight: 400;
+}

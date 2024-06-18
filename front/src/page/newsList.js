@@ -93,6 +93,7 @@ const NewsList = () => {
                 </div>
                 <div className={`list-cover ${isOpen === 1 ? 'open' : ''}`}>
                     <div className={`news-list-wrap ${isOpen === 1 ? 'open' : ''}`}>
+                        <div className='news-count'>최신 뉴스 : {newsList.length}</div>
                         {Array.isArray(newsList) && newsList.length > 0 ? (
                             newsList.map((news, i) => {
                                 return (
