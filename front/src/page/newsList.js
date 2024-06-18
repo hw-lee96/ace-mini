@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import './newsList.css'
 import NewsDetail from './newsDetail'
@@ -43,6 +43,31 @@ const NewsList = () => {
         setIsOpen(1)
     }
 
+    const [isLongPress, setIsLongPress] = useState(false);
+    const timerRef = useRef(null);
+
+    const handleMouseDown = (newsId) => {
+        timerRef.current = setTimeout(async () => {
+            setIsLongPress(true);
+            setNewsList(newsList.filter(e => e.id != newsId))
+            await axios.put(`api/news/delete/${newsId}`)
+            alert("Delete Success");
+        }, 1500);
+    };
+
+    const handleMouseUp = () => {
+        // 마우스를 떼면 타이머 취소
+        clearTimeout(timerRef.current);
+        if (isLongPress) {
+            setIsLongPress(false);
+        }
+    };
+
+    const handleMouseLeave = () => {
+        // 마우스를 버튼 밖으로 이동하면 타이머 취소
+        clearTimeout(timerRef.current);
+    };
+
     // 시작 시 실행
     useEffect(() => {
         getAllNewsList()
@@ -50,8 +75,8 @@ const NewsList = () => {
 
     return (
         <div className="news-list-container">
-            <div className='dimm' onClick={()=>setIsOpen(0)}></div>
-            <div className='news-list-box'>
+            <div className="dimm" onClick={() => setIsOpen(0)}></div>
+            <div className="news-list-box">
                 <div className="news-filter bgColor">
                     <div className={type === '' ? 'active' : ''} onClick={getAllNewsList}>
                         전체
@@ -78,6 +103,9 @@ const NewsList = () => {
                                                     src={news.img}
                                                     alt=""
                                                     onError={(e) => (e.target.src = './static/img_not_found.jpg')}
+                                                    onMouseDown={() => handleMouseDown(news.id)}
+                                                    onMouseUp={handleMouseUp}
+                                                    onMouseLeave={handleMouseLeave}
                                                 />
                                             </div>
                                             <div className="article-container">
@@ -85,7 +113,11 @@ const NewsList = () => {
                                                     🏢 관련성이 높은 기업 : {news.company_name}
                                                 </div>
                                                 <div>
-                                                    <div className={`title ${isOpen === 1 ? 'content-line-clamp-1' : ''}`}>
+                                                    <div
+                                                        className={`title ${
+                                                            isOpen === 1 ? 'content-line-clamp-1' : ''
+                                                        }`}
+                                                    >
                                                         {news.title}
                                                     </div>
                                                     <div className="content content-line-clamp-2">

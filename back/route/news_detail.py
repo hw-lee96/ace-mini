@@ -81,3 +81,13 @@ async def update_like_count(id: str):
 async def update_view_count(id: str, article):
     new_like_count = article.get('views', 0) + 1
     return news_collection.update_one({"_id" : ObjectId(id)}, {"$set": {"views": new_like_count}})
+
+@router.put('/delete/{id}')
+async def delete_news(id: str):
+    print('id : ', id)
+    article = news_collection.delete_one({"_id": ObjectId(id)})
+
+    if not article :
+         raise HTTPException(status_code=404, detail ="존재하지 않는 뉴스 입니다.")
+    
+    return {"code": "00"}
