@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom'
 
 import NewsCard from './newsCard'
 import useStore from '../../commonStore'
+import { useTheme } from '../../theme/themeProvider'
 
 async function getArticles(type) {
     try {
@@ -23,9 +24,10 @@ async function getArticles(type) {
 }
 
 function NewsCarousel({ type }) {
-  const prevRef = useRef(null)
+    const prevRef = useRef(null)
     const nextRef = useRef(null)
     const { setNewsId, setIsOpen } = useStore()
+    const [ThemeMode] = useTheme()
 
     const [relatedArticles, setRelatedArticles] = useState([])
 
@@ -55,7 +57,9 @@ function NewsCarousel({ type }) {
         <div className="swiper-container">
             <div className="swiper-top-wrap">
                 <div className="titleWrap">
-                    <div className="title">{type === 'like' ? '사람들이 가장 좋아한 뉴스' : '사람들이 가장 많이 본 뉴스'}</div>
+                    <div className="title">
+                        {type === 'like' ? '사람들이 가장 좋아한 뉴스' : '사람들이 가장 많이 본 뉴스'}
+                    </div>
                 </div>
                 <div className="swiper-button-wrap">
                     <div
@@ -63,10 +67,16 @@ function NewsCarousel({ type }) {
                         style={{ marginRight: '10px' }}
                         ref={prevRef}
                     >
-                        <img src="/static/prevBtn.png" alt="Previous" />
+                        <img
+                            src={ThemeMode == 'dark' ? '/static/prevBtn_dark.png' : '/static/prevBtn_light.png'}
+                            alt="Previous"
+                        />
                     </div>
                     <div className="swiper-button-next custom-nav-button" ref={nextRef}>
-                        <img src="/static/nextBtn.png" alt="Next" />
+                        <img
+                            src={ThemeMode == 'dark' ? '/static/nextBtn_dark.png' : '/static/nextBtn_light.png'}
+                            alt="Previous"
+                        />
                     </div>
                 </div>
             </div>
@@ -90,7 +100,8 @@ function NewsCarousel({ type }) {
                     centeredSlides={true}
                     autoplay={{
                         delay: 2500000,
-                    }}>
+                    }}
+                >
                     {relatedArticles.map((article) => (
                         <SwiperSlide key={article._id}>
                             <Link
