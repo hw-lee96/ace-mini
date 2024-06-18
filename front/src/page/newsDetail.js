@@ -173,11 +173,11 @@ const NewsDetail = () => {
         <p className="news-detail__date">{selectedArticle.date}</p>
 
         {ThemeMode === "dark" ? (
-          <a className="dark-mode__button" href={selectedArticle.link}>
+          <a target="_blank" className="dark-mode__button" href={selectedArticle.link}>
             기사 본문 보러가기
           </a>
         ) : (
-          <a className="news-detail__button" href={selectedArticle.link}>
+          <a target="_blank" className="news-detail__button" href={selectedArticle.link}>
             기사 본문 보러가기
           </a>
         )}
