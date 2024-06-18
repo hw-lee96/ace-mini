@@ -16,7 +16,7 @@ const NewsList = () => {
             setType('')
             let page = 1
             const response = await axios.get(`api/news/list/${page}`)
-            setNewsList(response.data || [])
+            setNewsList(listSort(response.data) || [])
             if (isOpen === 2) {
                 setIsOpen(1)
             }
@@ -32,10 +32,30 @@ const NewsList = () => {
             closeSlide()
             setType(type)
             const response = await axios.get(`api/news/list/pinbert/${type}`)
-            setNewsList(response.data || [])
+            setNewsList(listSort(response.data) || [])
         } catch (error) {
             console.error('Error fetching news list:', error)
         }
+    }
+
+    const listSort = (list) => {
+        return list.sort((a, b) => {
+            // gif 우선
+            if (a.img.indexOf('gif') > -1 && b.img.indexOf('gif') < 0) {
+                return -1
+            } else if ((a.img.indexOf('gif') > -1 && b.img.indexOf('gif') > -1) || (a.img.indexOf('gif') < 0 && b.img.indexOf('gif') < 0)) {
+                let aa = new Date(a.date)
+                let bb = new Date(b.date)
+                // 날짜 비교
+                if (aa > bb) {
+                    return -1
+                } else if (aa == bb) {
+                    return 0
+                } else {
+                    return 1
+                }
+            }
+        })
     }
 
     const handleItemClick = (newsId) => {
@@ -93,7 +113,7 @@ const NewsList = () => {
                 </div>
                 <div className={`list-cover ${isOpen === 1 ? 'open' : ''}`}>
                     <div className={`news-list-wrap ${isOpen === 1 ? 'open' : ''}`}>
-                        <div className='news-count'>최신 뉴스 : {newsList.length}</div>
+                        <div className="news-count">최신 뉴스 : {newsList.length}</div>
                         {Array.isArray(newsList) && newsList.length > 0 ? (
                             newsList.map((news, i) => {
                                 return (
@@ -140,8 +160,16 @@ const NewsList = () => {
                             })
                         ) : (
                             <div>
-                                <div className="itemWrap bgColor ftColor list-null" >
-                                    현재 {type == 'positive' ? '긍정적인 ' : type == 'neutral' ? '중립적인 ' : type == 'negative' ? '부정적인 ' : '' }뉴스기사가 없어요!
+                                <div className="itemWrap bgColor ftColor list-null">
+                                    현재{' '}
+                                    {type == 'positive'
+                                        ? '긍정적인 '
+                                        : type == 'neutral'
+                                        ? '중립적인 '
+                                        : type == 'negative'
+                                        ? '부정적인 '
+                                        : ''}
+                                    뉴스기사가 없어요!
                                 </div>
                             </div>
                         )}
